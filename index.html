@@ -8,7 +8,7 @@
 
   <meta
     name="description"
-    content="Official website of Oktavin.exe — indie game development, Unity tools and digital projects."
+    content="Official website of Oktavin.exe — game development, Unity tools and digital projects."
   />
 
   <style>
@@ -37,6 +37,7 @@
 
     body {
       font-family: Arial, Helvetica, sans-serif;
+
       background:
         radial-gradient(
           circle at top left,
@@ -45,7 +46,7 @@
         ),
         radial-gradient(
           circle at top right,
-          rgba(88, 224, 193, 0.1),
+          rgba(88, 224, 193, 0.10),
           transparent 30%
         ),
         var(--bg);
@@ -106,7 +107,6 @@
     .nav-right {
       display: flex;
       align-items: center;
-
       gap: 22px;
     }
 
@@ -127,7 +127,7 @@
       color: var(--text);
     }
 
-    /* LANGUAGES */
+    /* LANGUAGE */
 
     .language-switcher {
       display: flex;
@@ -166,6 +166,7 @@
 
     .lang-btn.active {
       background: var(--accent);
+
       color: #04100d;
     }
 
@@ -214,8 +215,6 @@
     }
 
     .glitch {
-      position: relative;
-
       display: inline-block;
 
       color: var(--text);
@@ -274,7 +273,7 @@
       border-color: var(--accent);
     }
 
-    /* HERO SIDE CARD */
+    /* HERO CARD */
 
     .hero-card {
       background:
@@ -330,16 +329,16 @@
     .section-subtitle {
       color: var(--muted);
 
-      max-width: 760px;
+      max-width: 780px;
 
       margin-bottom: 38px;
 
       font-size: 1.02rem;
     }
 
-    /* PROJECT GRID */
+    /* CATEGORY GRID */
 
-    .projects-grid {
+    .category-grid {
       display: grid;
 
       grid-template-columns:
@@ -348,13 +347,13 @@
       gap: 22px;
     }
 
-    .project-link {
+    .category-link {
       display: block;
 
       height: 100%;
     }
 
-    .project-card {
+    .category-card {
       height: 100%;
 
       display: flex;
@@ -366,7 +365,7 @@
 
       border-radius: 16px;
 
-      padding: 26px;
+      padding: 28px;
 
       transition:
         transform 0.2s ease,
@@ -374,7 +373,7 @@
         box-shadow 0.2s ease;
     }
 
-    .project-link:hover .project-card {
+    .category-link:hover .category-card {
       transform: translateY(-5px);
 
       border-color: var(--accent);
@@ -382,7 +381,7 @@
       box-shadow: 0 14px 34px rgba(0, 0, 0, 0.25);
     }
 
-    .project-card.placeholder:hover {
+    .category-card.placeholder:hover {
       transform: none;
 
       border-color: var(--border);
@@ -390,7 +389,7 @@
       box-shadow: none;
     }
 
-    .tag {
+    .category-tag {
       color: var(--accent);
 
       font-size: 0.8rem;
@@ -402,25 +401,25 @@
       margin-bottom: 10px;
     }
 
-    .project-card h3 {
-      margin-bottom: 12px;
+    .category-card h3 {
+      font-size: 1.35rem;
 
-      font-size: 1.25rem;
+      margin-bottom: 12px;
     }
 
-    .project-card p {
+    .category-card p {
       color: var(--muted);
 
       font-size: 0.97rem;
     }
 
-    .project-bottom {
+    .category-bottom {
       margin-top: auto;
 
-      padding-top: 24px;
+      padding-top: 26px;
     }
 
-    .project-open {
+    .category-open {
       color: var(--accent);
 
       font-weight: 700;
@@ -428,7 +427,7 @@
       font-size: 0.92rem;
     }
 
-    .project-state {
+    .category-state {
       display: inline-block;
 
       padding: 7px 10px;
@@ -442,12 +441,12 @@
       font-size: 0.82rem;
     }
 
-    /* MULTI PROJECT MESSAGE */
+    /* STRUCTURE NOTE */
 
-    .projects-note {
+    .structure-note {
       margin-top: 32px;
 
-      padding: 24px;
+      padding: 26px;
 
       border: 1px solid var(--line);
 
@@ -456,19 +455,17 @@
       background: rgba(88, 224, 193, 0.035);
     }
 
-    .projects-note strong {
+    .structure-note strong {
       display: block;
 
       margin-bottom: 6px;
-
-      color: var(--text);
     }
 
-    .projects-note p {
+    .structure-note p {
       color: var(--muted);
     }
 
-    /* ABOUT / CONTACT */
+    /* ABOUT + CONTACT */
 
     .info-box {
       background: var(--panel-2);
@@ -524,9 +521,10 @@
       gap: 20px;
     }
 
-    /* RESPONSIVE */
+    /* MOBILE */
 
     @media (max-width: 900px) {
+
       .hero-grid {
         grid-template-columns: 1fr;
       }
@@ -555,6 +553,7 @@
     }
 
     @media (max-width: 560px) {
+
       .container {
         width: min(100% - 24px, 1180px);
       }
@@ -571,23 +570,30 @@
         flex-direction: column;
       }
     }
+
   </style>
 </head>
 
 <body>
 
   <header>
+
     <div class="container">
 
       <nav>
 
-        <a class="brand" href="#top">
+        <a
+          class="brand"
+          href="#top"
+        >
           Oktavin.exe
         </a>
+
 
         <div class="nav-right">
 
           <div class="nav-links">
+
             <a
               href="#projects"
               data-i18n="navProjects"
@@ -608,7 +614,9 @@
             >
               Contact
             </a>
+
           </div>
+
 
           <div
             class="language-switcher"
@@ -650,6 +658,7 @@
       </nav>
 
     </div>
+
   </header>
 
 
@@ -670,17 +679,26 @@
             Game Development / Unity Tools / Digital Projects
           </div>
 
+
           <h1>
+
             <span class="glitch">
               Oktavin.exe
             </span>
+
           </h1>
 
+
           <p data-i18n="heroText">
-            An independent development brand for games,
+
+            Independent development of games,
             Unity tools and digital projects.
-            New projects will be added here as they are developed and released.
+
+            Explore the different project categories
+            and follow their development.
+
           </p>
+
 
           <div class="actions">
 
@@ -711,13 +729,17 @@
             SYSTEM_STATUS: ONLINE
           </div>
 
+
           <h3 data-i18n="currentFocusTitle">
-            Building the Oktavin.exe portfolio
+            Building Oktavin.exe
           </h3>
 
+
           <p data-i18n="currentFocusText">
-            Oktavin.exe is a growing collection of development projects,
-            Unity tools, experiments and future game releases.
+
+            A growing collection of development tools,
+            game projects and digital experiments.
+
           </p>
 
         </div>
@@ -727,7 +749,7 @@
     </section>
 
 
-    <!-- PROJECTS -->
+    <!-- PROJECT CATEGORIES -->
 
     <section id="projects">
 
@@ -737,55 +759,61 @@
           class="section-title"
           data-i18n="projectsTitle"
         >
-          Projects
+          Project Categories
         </h2>
+
 
         <p
           class="section-subtitle"
           data-i18n="projectsSubtitle"
         >
-          Explore current Oktavin.exe projects.
-          Each released or publicly presented project can have its own dedicated page.
+
+          Choose a category to explore projects,
+          tools and future releases developed under Oktavin.exe.
+
         </p>
 
 
-        <div class="projects-grid">
+        <div class="category-grid">
 
-          <!-- EASY INTERACTION SYSTEM -->
+
+          <!-- UNITY TOOLS -->
 
           <a
-            class="project-link"
-            href="/projects/easy-interaction-system/"
+            class="category-link"
+            href="/unity-tools/"
           >
 
-            <article class="project-card">
+            <article class="category-card">
 
               <div
-                class="tag"
-                data-i18n="unityToolTag"
+                class="category-tag"
+                data-i18n="unityCategoryTag"
               >
-                Unity Tool
+                Development Tools
               </div>
 
-              <h3>
-                Easy Interaction System
+
+              <h3 data-i18n="unityCategoryTitle">
+                Unity Tools
               </h3>
 
-              <p
-                data-i18n="interactionDescription"
-              >
-                A reusable Unity interaction system
-                designed to simplify interactive objects
-                and gameplay interactions.
+
+              <p data-i18n="unityCategoryDescription">
+
+                Reusable Unity tools and systems
+                designed to simplify game development.
+
               </p>
 
-              <div class="project-bottom">
+
+              <div class="category-bottom">
 
                 <span
-                  class="project-open"
-                  data-i18n="viewProject"
+                  class="category-open"
+                  data-i18n="viewTools"
                 >
-                  View Project →
+                  View Tools →
                 </span>
 
               </div>
@@ -795,37 +823,38 @@
           </a>
 
 
-          <!-- FUTURE GAME PROJECTS -->
+          <!-- GAMES -->
 
-          <article class="project-card placeholder">
+          <article class="category-card placeholder">
 
             <div
-              class="tag"
-              data-i18n="gameDevTag"
+              class="category-tag"
+              data-i18n="gamesCategoryTag"
             >
               Game Development
             </div>
 
-            <h3
-              data-i18n="futureGamesTitle"
-            >
-              Game Projects
+
+            <h3 data-i18n="gamesCategoryTitle">
+              Games
             </h3>
 
-            <p
-              data-i18n="futureGamesDescription"
-            >
-              Original game-development projects will appear here
-              when they are ready to be publicly presented.
+
+            <p data-i18n="gamesCategoryDescription">
+
+              Original game projects developed
+              under the Oktavin.exe brand.
+
             </p>
 
-            <div class="project-bottom">
+
+            <div class="category-bottom">
 
               <span
-                class="project-state"
-                data-i18n="futureProjectsState"
+                class="category-state"
+                data-i18n="comingLater"
               >
-                Future projects
+                Coming later
               </span>
 
             </div>
@@ -833,37 +862,38 @@
           </article>
 
 
-          <!-- MORE TOOLS -->
+          <!-- OTHER PROJECTS -->
 
-          <article class="project-card placeholder">
+          <article class="category-card placeholder">
 
             <div
-              class="tag"
-              data-i18n="toolsTag"
+              class="category-tag"
+              data-i18n="otherCategoryTag"
             >
-              Tools & Systems
+              Experiments & More
             </div>
 
-            <h3
-              data-i18n="moreToolsTitle"
-            >
-              More Development Tools
+
+            <h3 data-i18n="otherCategoryTitle">
+              Other Projects
             </h3>
 
-            <p
-              data-i18n="moreToolsDescription"
-            >
-              Future Unity tools, reusable systems
-              and development utilities can be published here.
+
+            <p data-i18n="otherCategoryDescription">
+
+              Experimental systems,
+              applications and other development projects.
+
             </p>
 
-            <div class="project-bottom">
+
+            <div class="category-bottom">
 
               <span
-                class="project-state"
-                data-i18n="futureProjectsState"
+                class="category-state"
+                data-i18n="comingLater"
               >
-                Future projects
+                Coming later
               </span>
 
             </div>
@@ -873,16 +903,19 @@
         </div>
 
 
-        <div class="projects-note">
+        <div class="structure-note">
 
-          <strong data-i18n="projectsNoteTitle">
-            This portfolio will grow over time.
+          <strong data-i18n="structureTitle">
+            One brand. Multiple project categories.
           </strong>
 
-          <p data-i18n="projectsNoteText">
-            Oktavin.exe is not built around one product.
-            New games, Unity tools and other development projects
-            will receive their own pages as they become ready for public presentation.
+
+          <p data-i18n="structureText">
+
+            Oktavin.exe will grow over time.
+            Each category can contain multiple projects,
+            and every public project can have its own dedicated page.
+
           </p>
 
         </div>
@@ -905,21 +938,28 @@
           About
         </h2>
 
+
         <p
           class="section-subtitle"
           data-i18n="aboutSubtitle"
         >
+
           Oktavin.exe is an independent development brand
-          focused on game development, Unity tools
+          focused on games, Unity tools
           and practical digital projects.
+
         </p>
+
 
         <div class="info-box">
 
           <p data-i18n="aboutText">
+
             The goal is to learn through real development,
-            create useful products and gradually build
-            a growing portfolio of games, tools and interactive systems.
+            create useful products
+            and gradually build a growing portfolio
+            of games, tools and interactive systems.
+
           </p>
 
         </div>
@@ -941,6 +981,7 @@
         >
           Contact
         </h2>
+
 
         <div class="info-box">
 
@@ -1007,15 +1048,21 @@
 
       en: {
 
-        navProjects: "Projects",
-        navAbout: "About",
-        navContact: "Contact",
+        navProjects:
+          "Projects",
+
+        navAbout:
+          "About",
+
+        navContact:
+          "Contact",
+
 
         heroEyebrow:
           "Game Development / Unity Tools / Digital Projects",
 
         heroText:
-          "An independent development brand for games, Unity tools and digital projects. New projects will be added here as they are developed and released.",
+          "Independent development of games, Unity tools and digital projects. Explore the different project categories and follow their development.",
 
         viewProjects:
           "Explore Projects",
@@ -1023,62 +1070,74 @@
         contactButton:
           "Contact",
 
+
         currentFocusTitle:
-          "Building the Oktavin.exe portfolio",
+          "Building Oktavin.exe",
 
         currentFocusText:
-          "Oktavin.exe is a growing collection of development projects, Unity tools, experiments and future game releases.",
+          "A growing collection of development tools, game projects and digital experiments.",
+
 
         projectsTitle:
-          "Projects",
+          "Project Categories",
 
         projectsSubtitle:
-          "Explore current Oktavin.exe projects. Each released or publicly presented project can have its own dedicated page.",
+          "Choose a category to explore projects, tools and future releases developed under Oktavin.exe.",
 
-        unityToolTag:
-          "Unity Tool",
 
-        interactionDescription:
-          "A reusable Unity interaction system designed to simplify interactive objects and gameplay interactions.",
+        unityCategoryTag:
+          "Development Tools",
 
-        viewProject:
-          "View Project →",
+        unityCategoryTitle:
+          "Unity Tools",
 
-        gameDevTag:
+        unityCategoryDescription:
+          "Reusable Unity tools and systems designed to simplify game development.",
+
+        viewTools:
+          "View Tools →",
+
+
+        gamesCategoryTag:
           "Game Development",
 
-        futureGamesTitle:
-          "Game Projects",
+        gamesCategoryTitle:
+          "Games",
 
-        futureGamesDescription:
-          "Original game-development projects will appear here when they are ready to be publicly presented.",
+        gamesCategoryDescription:
+          "Original game projects developed under the Oktavin.exe brand.",
 
-        toolsTag:
-          "Tools & Systems",
 
-        moreToolsTitle:
-          "More Development Tools",
+        otherCategoryTag:
+          "Experiments & More",
 
-        moreToolsDescription:
-          "Future Unity tools, reusable systems and development utilities can be published here.",
+        otherCategoryTitle:
+          "Other Projects",
 
-        futureProjectsState:
-          "Future projects",
+        otherCategoryDescription:
+          "Experimental systems, applications and other development projects.",
 
-        projectsNoteTitle:
-          "This portfolio will grow over time.",
 
-        projectsNoteText:
-          "Oktavin.exe is not built around one product. New games, Unity tools and other development projects will receive their own pages as they become ready for public presentation.",
+        comingLater:
+          "Coming later",
+
+
+        structureTitle:
+          "One brand. Multiple project categories.",
+
+        structureText:
+          "Oktavin.exe will grow over time. Each category can contain multiple projects, and every public project can have its own dedicated page.",
+
 
         aboutTitle:
           "About",
 
         aboutSubtitle:
-          "Oktavin.exe is an independent development brand focused on game development, Unity tools and practical digital projects.",
+          "Oktavin.exe is an independent development brand focused on games, Unity tools and practical digital projects.",
 
         aboutText:
           "The goal is to learn through real development, create useful products and gradually build a growing portfolio of games, tools and interactive systems.",
+
 
         contactTitle:
           "Contact",
@@ -1086,8 +1145,10 @@
         emailLabel:
           "Email",
 
+
         footerText:
           "Game Development · Unity Tools · Digital Projects"
+
       },
 
 
@@ -1104,11 +1165,12 @@
         navContact:
           "Kontakt",
 
+
         heroEyebrow:
           "Spieleentwicklung / Unity Tools / Digitale Projekte",
 
         heroText:
-          "Eine unabhängige Entwicklungsmarke für Spiele, Unity-Tools und digitale Projekte. Neue Projekte werden hier hinzugefügt, sobald sie entwickelt und veröffentlicht werden.",
+          "Unabhängige Entwicklung von Spielen, Unity-Tools und digitalen Projekten. Entdecke verschiedene Projektkategorien und verfolge ihre Entwicklung.",
 
         viewProjects:
           "Projekte entdecken",
@@ -1116,62 +1178,74 @@
         contactButton:
           "Kontakt",
 
+
         currentFocusTitle:
-          "Aufbau des Oktavin.exe-Portfolios",
+          "Aufbau von Oktavin.exe",
 
         currentFocusText:
-          "Oktavin.exe ist eine wachsende Sammlung aus Entwicklungsprojekten, Unity-Tools, Experimenten und zukünftigen Spieleveröffentlichungen.",
+          "Eine wachsende Sammlung aus Entwicklungstools, Spieleprojekten und digitalen Experimenten.",
+
 
         projectsTitle:
-          "Projekte",
+          "Projektkategorien",
 
         projectsSubtitle:
-          "Entdecke aktuelle Oktavin.exe-Projekte. Jedes veröffentlichte oder öffentlich präsentierte Projekt kann eine eigene Seite erhalten.",
+          "Wähle eine Kategorie, um Projekte, Tools und zukünftige Veröffentlichungen von Oktavin.exe zu entdecken.",
 
-        unityToolTag:
-          "Unity-Tool",
 
-        interactionDescription:
-          "Ein wiederverwendbares Unity-Interaktionssystem zur Vereinfachung interaktiver Objekte und Gameplay-Interaktionen.",
+        unityCategoryTag:
+          "Entwicklungstools",
 
-        viewProject:
-          "Projekt ansehen →",
+        unityCategoryTitle:
+          "Unity Tools",
 
-        gameDevTag:
+        unityCategoryDescription:
+          "Wiederverwendbare Unity-Tools und Systeme zur Vereinfachung der Spieleentwicklung.",
+
+        viewTools:
+          "Tools ansehen →",
+
+
+        gamesCategoryTag:
           "Spieleentwicklung",
 
-        futureGamesTitle:
-          "Spieleprojekte",
+        gamesCategoryTitle:
+          "Spiele",
 
-        futureGamesDescription:
-          "Eigene Spieleprojekte erscheinen hier, sobald sie für eine öffentliche Präsentation bereit sind.",
+        gamesCategoryDescription:
+          "Eigene Spieleprojekte, die unter der Marke Oktavin.exe entwickelt werden.",
 
-        toolsTag:
-          "Tools & Systeme",
 
-        moreToolsTitle:
-          "Weitere Entwicklungstools",
+        otherCategoryTag:
+          "Experimente & mehr",
 
-        moreToolsDescription:
-          "Zukünftige Unity-Tools, wiederverwendbare Systeme und Entwicklungswerkzeuge können hier veröffentlicht werden.",
+        otherCategoryTitle:
+          "Weitere Projekte",
 
-        futureProjectsState:
-          "Zukünftige Projekte",
+        otherCategoryDescription:
+          "Experimentelle Systeme, Anwendungen und weitere Entwicklungsprojekte.",
 
-        projectsNoteTitle:
-          "Dieses Portfolio wird mit der Zeit wachsen.",
 
-        projectsNoteText:
-          "Oktavin.exe basiert nicht auf nur einem Produkt. Neue Spiele, Unity-Tools und weitere Entwicklungsprojekte erhalten eigene Seiten, sobald sie öffentlich präsentiert werden können.",
+        comingLater:
+          "Später verfügbar",
+
+
+        structureTitle:
+          "Eine Marke. Mehrere Projektkategorien.",
+
+        structureText:
+          "Oktavin.exe wird mit der Zeit wachsen. Jede Kategorie kann mehrere Projekte enthalten, und jedes öffentliche Projekt kann eine eigene Seite erhalten.",
+
 
         aboutTitle:
           "Über mich",
 
         aboutSubtitle:
-          "Oktavin.exe ist eine unabhängige Entwicklungsmarke mit Fokus auf Spieleentwicklung, Unity-Tools und praktische digitale Projekte.",
+          "Oktavin.exe ist eine unabhängige Entwicklungsmarke mit Fokus auf Spiele, Unity-Tools und praktische digitale Projekte.",
 
         aboutText:
           "Das Ziel ist, durch echte Entwicklung zu lernen, nützliche Produkte zu erstellen und schrittweise ein wachsendes Portfolio aus Spielen, Tools und interaktiven Systemen aufzubauen.",
+
 
         contactTitle:
           "Kontakt",
@@ -1179,8 +1253,10 @@
         emailLabel:
           "E-Mail",
 
+
         footerText:
           "Spieleentwicklung · Unity-Tools · Digitale Projekte"
+
       },
 
 
@@ -1197,11 +1273,12 @@
         navContact:
           "Контакти",
 
+
         heroEyebrow:
           "Розробка ігор / Unity Tools / Цифрові проєкти",
 
         heroText:
-          "Незалежний бренд розробки ігор, Unity-інструментів і цифрових проєктів. Нові проєкти з'являтимуться тут у міру їх розробки та випуску.",
+          "Незалежна розробка ігор, Unity-інструментів та цифрових проєктів. Обирайте напрям і стежте за розвитком проєктів.",
 
         viewProjects:
           "Переглянути проєкти",
@@ -1209,62 +1286,74 @@
         contactButton:
           "Контакти",
 
+
         currentFocusTitle:
-          "Розвиток портфоліо Oktavin.exe",
+          "Розвиток Oktavin.exe",
 
         currentFocusText:
-          "Oktavin.exe — це колекція проєктів у розробці, Unity-інструментів, експериментів і майбутніх ігрових релізів.",
+          "Колекція інструментів розробки, ігрових проєктів та цифрових експериментів, що постійно зростає.",
+
 
         projectsTitle:
-          "Проєкти",
+          "Категорії проєктів",
 
         projectsSubtitle:
-          "Переглядайте актуальні проєкти Oktavin.exe. Кожен опублікований або публічно представлений проєкт може мати власну окрему сторінку.",
+          "Оберіть категорію, щоб переглянути проєкти, інструменти та майбутні релізи Oktavin.exe.",
 
-        unityToolTag:
-          "Інструмент Unity",
 
-        interactionDescription:
-          "Багаторазова система взаємодії для Unity, створена для спрощення інтерактивних об'єктів та ігрових взаємодій.",
+        unityCategoryTag:
+          "Інструменти розробки",
 
-        viewProject:
-          "Переглянути проєкт →",
+        unityCategoryTitle:
+          "Unity Tools",
 
-        gameDevTag:
+        unityCategoryDescription:
+          "Багаторазові Unity-інструменти та системи, створені для спрощення розробки ігор.",
+
+        viewTools:
+          "Переглянути інструменти →",
+
+
+        gamesCategoryTag:
           "Розробка ігор",
 
-        futureGamesTitle:
-          "Ігрові проєкти",
+        gamesCategoryTitle:
+          "Ігри",
 
-        futureGamesDescription:
-          "Власні ігрові проєкти з'являтимуться тут, коли будуть готові до публічної презентації.",
+        gamesCategoryDescription:
+          "Власні ігрові проєкти, що розробляються під брендом Oktavin.exe.",
 
-        toolsTag:
-          "Інструменти та системи",
 
-        moreToolsTitle:
-          "Більше інструментів",
+        otherCategoryTag:
+          "Експерименти та інше",
 
-        moreToolsDescription:
-          "Майбутні Unity-інструменти, багаторазові системи та інші засоби розробки можуть бути опубліковані тут.",
+        otherCategoryTitle:
+          "Інші проєкти",
 
-        futureProjectsState:
-          "Майбутні проєкти",
+        otherCategoryDescription:
+          "Експериментальні системи, застосунки та інші проєкти розробки.",
 
-        projectsNoteTitle:
-          "Це портфоліо буде зростати.",
 
-        projectsNoteText:
-          "Oktavin.exe не будується навколо одного продукту. Нові ігри, Unity-інструменти та інші проєкти отримуватимуть власні сторінки, коли будуть готові до публічної презентації.",
+        comingLater:
+          "З'явиться пізніше",
+
+
+        structureTitle:
+          "Один бренд. Кілька напрямів.",
+
+        structureText:
+          "Oktavin.exe буде розвиватися з часом. Кожна категорія може містити багато проєктів, а кожен публічний проєкт може отримати власну сторінку.",
+
 
         aboutTitle:
           "Про мене",
 
         aboutSubtitle:
-          "Oktavin.exe — незалежний бренд розробки, зосереджений на створенні ігор, Unity-інструментів і практичних цифрових проєктів.",
+          "Oktavin.exe — незалежний бренд розробки, зосереджений на іграх, Unity-інструментах та практичних цифрових проєктах.",
 
         aboutText:
           "Мета — навчатися через реальну розробку, створювати корисні продукти та поступово формувати портфоліо ігор, інструментів та інтерактивних систем.",
+
 
         contactTitle:
           "Контакти",
@@ -1272,8 +1361,10 @@
         emailLabel:
           "Електронна пошта",
 
+
         footerText:
           "Розробка ігор · Інструменти Unity · Цифрові проєкти"
+
       },
 
 
@@ -1290,11 +1381,12 @@
         navContact:
           "Контакты",
 
+
         heroEyebrow:
           "Разработка игр / Unity Tools / Цифровые проекты",
 
         heroText:
-          "Независимый бренд разработки игр, Unity-инструментов и цифровых проектов. Новые проекты будут появляться здесь по мере их разработки и выпуска.",
+          "Независимая разработка игр, Unity-инструментов и цифровых проектов. Выбирайте направление и следите за развитием проектов.",
 
         viewProjects:
           "Посмотреть проекты",
@@ -1302,62 +1394,74 @@
         contactButton:
           "Контакты",
 
+
         currentFocusTitle:
-          "Развитие портфолио Oktavin.exe",
+          "Развитие Oktavin.exe",
 
         currentFocusText:
-          "Oktavin.exe — это растущая коллекция проектов в разработке, Unity-инструментов, экспериментов и будущих игровых релизов.",
+          "Растущая коллекция инструментов разработки, игровых проектов и цифровых экспериментов.",
+
 
         projectsTitle:
-          "Проекты",
+          "Категории проектов",
 
         projectsSubtitle:
-          "Здесь собраны проекты Oktavin.exe. Каждый опубликованный или публично представленный проект может получить собственную отдельную страницу.",
+          "Выберите категорию, чтобы посмотреть проекты, инструменты и будущие релизы Oktavin.exe.",
 
-        unityToolTag:
-          "Инструмент Unity",
 
-        interactionDescription:
-          "Многоразовая система взаимодействия для Unity, созданная для упрощения интерактивных объектов и игровых взаимодействий.",
+        unityCategoryTag:
+          "Инструменты разработки",
 
-        viewProject:
-          "Открыть проект →",
+        unityCategoryTitle:
+          "Unity Tools",
 
-        gameDevTag:
+        unityCategoryDescription:
+          "Многоразовые Unity-инструменты и системы, созданные для упрощения разработки игр.",
+
+        viewTools:
+          "Открыть инструменты →",
+
+
+        gamesCategoryTag:
           "Разработка игр",
 
-        futureGamesTitle:
-          "Игровые проекты",
+        gamesCategoryTitle:
+          "Игры",
 
-        futureGamesDescription:
-          "Собственные игровые проекты будут появляться здесь, когда они будут готовы к публичной презентации.",
+        gamesCategoryDescription:
+          "Собственные игровые проекты, разрабатываемые под брендом Oktavin.exe.",
 
-        toolsTag:
-          "Инструменты и системы",
 
-        moreToolsTitle:
-          "Больше инструментов",
+        otherCategoryTag:
+          "Эксперименты и другое",
 
-        moreToolsDescription:
-          "Будущие Unity-инструменты, многоразовые системы и другие средства разработки смогут публиковаться здесь.",
+        otherCategoryTitle:
+          "Другие проекты",
 
-        futureProjectsState:
-          "Будущие проекты",
+        otherCategoryDescription:
+          "Экспериментальные системы, приложения и другие проекты разработки.",
 
-        projectsNoteTitle:
-          "Это портфолио будет постепенно расти.",
 
-        projectsNoteText:
-          "Oktavin.exe не строится вокруг одного продукта. Новые игры, Unity-инструменты и другие проекты будут получать собственные страницы, когда станут готовы к публичной презентации.",
+        comingLater:
+          "Появится позже",
+
+
+        structureTitle:
+          "Один бренд. Несколько направлений.",
+
+        structureText:
+          "Oktavin.exe будет развиваться со временем. Каждая категория сможет содержать множество проектов, а каждый публичный проект сможет получить собственную страницу.",
+
 
         aboutTitle:
           "Обо мне",
 
         aboutSubtitle:
-          "Oktavin.exe — независимый бренд разработки, сосредоточенный на создании игр, Unity-инструментов и практических цифровых проектов.",
+          "Oktavin.exe — независимый бренд разработки, сосредоточенный на играх, Unity-инструментах и практических цифровых проектах.",
 
         aboutText:
           "Цель — учиться через реальную разработку, создавать полезные продукты и постепенно формировать растущее портфолио игр, инструментов и интерактивных систем.",
+
 
         contactTitle:
           "Контакты",
@@ -1365,8 +1469,10 @@
         emailLabel:
           "Электронная почта",
 
+
         footerText:
           "Разработка игр · Инструменты Unity · Цифровые проекты"
+
       }
 
     };
@@ -1399,8 +1505,10 @@
 
 
           if (dict[key]) {
+
             element.textContent =
               dict[key];
+
           }
 
         });
