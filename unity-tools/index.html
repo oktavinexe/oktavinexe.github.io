@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Unity Tools — Oktavin.exe</title>
+
+  <meta
+    name="description"
+    content="Unity tools and reusable development systems created by Oktavin.exe."
+  >
+
+  <style>
+    :root {
+      --bg: #07090d;
+      --panel: #0f131a;
+      --panel-hover: #121821;
+      --text: #e9f1f5;
+      --muted: #8ea0ad;
+      --accent: #58e0c1;
+      --accent-2: #9f6bff;
+      --line: rgba(88, 224, 193, 0.22);
+      --border: #232b35;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* HEADER */
+
+    header {
+      border-bottom: 1px solid var(--line);
+      background: rgba(7, 9, 13, 0.96);
+    }
+
+    .nav {
+      max-width: 1250px;
+      margin: 0 auto;
+      min-height: 90px;
+      padding: 0 20px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    .brand {
+      color: var(--accent);
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+
+    .back-link {
+      color: var(--muted);
+      font-size: 16px;
+      transition: 0.2s ease;
+    }
+
+    .back-link:hover {
+      color: var(--accent);
+    }
+
+    .languages {
+      display: flex;
+      gap: 8px;
+    }
+
+    .lang-btn {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 7px 11px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: 0.2s ease;
+    }
+
+    .lang-btn:hover,
+    .lang-btn.active {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    /* MAIN */
+
+    main {
+      max-width: 1250px;
+      margin: 0 auto;
+      padding: 90px 20px 120px;
+    }
+
+    .hero {
+      max-width: 850px;
+      margin-bottom: 75px;
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    h1 {
+      font-size: clamp(44px, 7vw, 76px);
+      line-height: 1.05;
+      margin-bottom: 25px;
+    }
+
+    .hero-text {
+      color: #9dbbd0;
+      font-size: 21px;
+      max-width: 760px;
+    }
+
+    /* TOOLS */
+
+    .section-header {
+      margin-bottom: 32px;
+    }
+
+    .section-header h2 {
+      font-size: 34px;
+      margin-bottom: 8px;
+    }
+
+    .section-header p {
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 24px;
+    }
+
+    .tool-card {
+      position: relative;
+      min-height: 310px;
+
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+
+      padding: 30px;
+
+      display: flex;
+      flex-direction: column;
+
+      transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        background 0.2s ease;
+    }
+
+    .tool-card.clickable:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent);
+      background: var(--panel-hover);
+    }
+
+    .tool-tag {
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-size: 14px;
+      margin-bottom: 17px;
+    }
+
+    .tool-card h3 {
+      font-size: 25px;
+      margin-bottom: 15px;
+    }
+
+    .tool-description {
+      color: #9dbbd0;
+      font-size: 17px;
+      margin-bottom: 30px;
+    }
+
+    .tool-footer {
+      margin-top: auto;
+    }
+
+    .view-project {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    .status {
+      display: inline-block;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 7px 12px;
+      font-size: 14px;
+    }
+
+    /* COMING SOON */
+
+    .coming-soon {
+      opacity: 0.72;
+    }
+
+    /* FOOTER */
+
+    footer {
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-inner {
+      max-width: 1250px;
+      margin: 0 auto;
+      padding: 35px 20px;
+
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+
+      color: #8eaec3;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 750px) {
+      .nav {
+        align-items: flex-start;
+        flex-direction: column;
+        padding-top: 22px;
+        padding-bottom: 22px;
+      }
+
+      .nav-right {
+        width: 100%;
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+
+      main {
+        padding-top: 60px;
+      }
+
+      .tools-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+
+    <a href="../" class="brand">
+      Oktavin.exe
+    </a>
+
+    <div class="nav-right">
+
+      <a
+        href="../"
+        class="back-link"
+        data-i18n="backHome"
+      >
+        ← Back to Home
+      </a>
+
+      <div class="languages">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="de">DE</button>
+        <button class="lang-btn" data-lang="ua">UA</button>
+        <button class="lang-btn" data-lang="ru">RU</button>
+      </div>
+
+    </div>
+  </div>
+</header>
+
+
+<main>
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div
+      class="eyebrow"
+      data-i18n="eyebrow"
+    >
+      DEVELOPMENT
+    </div>
+
+    <h1 data-i18n="title">
+      Unity Tools
+    </h1>
+
+    <p
+      class="hero-text"
+      data-i18n="intro"
+    >
+      A growing collection of reusable Unity systems and development tools
+      created by Oktavin.exe.
+    </p>
+
+  </section>
+
+
+  <!-- TOOLS -->
+
+  <section>
+
+    <div class="section-header">
+
+      <h2 data-i18n="toolsTitle">
+        Tools
+      </h2>
+
+      <p data-i18n="toolsSubtitle">
+        Explore available and upcoming Unity development tools.
+      </p>
+
+    </div>
+
+
+    <div class="tools-grid">
+
+      <!-- EASY INTERACTION SYSTEM -->
+
+      <a
+        href="easy-interaction-system/"
+        class="tool-card clickable"
+      >
+
+        <div
+          class="tool-tag"
+          data-i18n="interactionTag"
+        >
+          UNITY SYSTEM
+        </div>
+
+        <h3>
+          Easy Interaction System
+        </h3>
+
+        <p
+          class="tool-description"
+          data-i18n="interactionDescription"
+        >
+          A reusable Unity interaction system designed to simplify
+          interactive objects and gameplay interactions.
+        </p>
+
+        <div class="tool-footer">
+
+          <span
+            class="view-project"
+            data-i18n="viewTool"
+          >
+            View Tool →
+          </span>
+
+        </div>
+
+      </a>
+
+
+      <!-- FUTURE TOOL -->
+
+      <article class="tool-card coming-soon">
+
+        <div
+          class="tool-tag"
+          data-i18n="futureTag"
+        >
+          FUTURE TOOL
+        </div>
+
+        <h3 data-i18n="futureTitle">
+          More Unity Tools
+        </h3>
+
+        <p
+          class="tool-description"
+          data-i18n="futureDescription"
+        >
+          Additional reusable Unity systems and development tools
+          will be added here as they are created.
+        </p>
+
+        <div class="tool-footer">
+
+          <span
+            class="status"
+            data-i18n="comingSoon"
+          >
+            Coming Soon
+          </span>
+
+        </div>
+
+      </article>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<footer>
+
+  <div class="footer-inner">
+
+    <div>
+      © 2026 Oktavin.exe
+    </div>
+
+    <div data-i18n="footer">
+      Game Development · Unity Tools · Digital Projects
+    </div>
+
+  </div>
+
+</footer>
+
+
+<script>
+
+const translations = {
+
+  en: {
+    backHome: "← Back to Home",
+    eyebrow: "DEVELOPMENT",
+    title: "Unity Tools",
+    intro:
+      "A growing collection of reusable Unity systems and development tools created by Oktavin.exe.",
+
+    toolsTitle: "Tools",
+    toolsSubtitle:
+      "Explore available and upcoming Unity development tools.",
+
+    interactionTag: "UNITY SYSTEM",
+    interactionDescription:
+      "A reusable Unity interaction system designed to simplify interactive objects and gameplay interactions.",
+
+    viewTool: "View Tool →",
+
+    futureTag: "FUTURE TOOL",
+    futureTitle: "More Unity Tools",
+    futureDescription:
+      "Additional reusable Unity systems and development tools will be added here as they are created.",
+
+    comingSoon: "Coming Soon",
+
+    footer:
+      "Game Development · Unity Tools · Digital Projects"
+  },
+
+
+  de: {
+    backHome: "← Zurück zur Startseite",
+    eyebrow: "ENTWICKLUNG",
+    title: "Unity Tools",
+    intro:
+      "Eine wachsende Sammlung wiederverwendbarer Unity-Systeme und Entwicklungstools von Oktavin.exe.",
+
+    toolsTitle: "Tools",
+    toolsSubtitle:
+      "Entdecke verfügbare und kommende Unity-Entwicklungstools.",
+
+    interactionTag: "UNITY-SYSTEM",
+    interactionDescription:
+      "Ein wiederverwendbares Unity-Interaktionssystem zur Vereinfachung interaktiver Objekte und Gameplay-Interaktionen.",
+
+    viewTool: "Tool ansehen →",
+
+    futureTag: "ZUKÜNFTIGES TOOL",
+    futureTitle: "Weitere Unity Tools",
+    futureDescription:
+      "Weitere wiederverwendbare Unity-Systeme und Entwicklungstools werden hier hinzugefügt, sobald sie erstellt werden.",
+
+    comingSoon: "Demnächst",
+
+    footer:
+      "Spieleentwicklung · Unity Tools · Digitale Projekte"
+  },
+
+
+  ua: {
+    backHome: "← На головну",
+    eyebrow: "РОЗРОБКА",
+    title: "Unity Tools",
+    intro:
+      "Колекція багаторазових Unity-систем та інструментів розробки від Oktavin.exe, яка постійно розширюється.",
+
+    toolsTitle: "Інструменти",
+    toolsSubtitle:
+      "Переглядайте доступні та майбутні інструменти для розробки в Unity.",
+
+    interactionTag: "UNITY-СИСТЕМА",
+    interactionDescription:
+      "Багаторазова система взаємодії для Unity, створена для спрощення інтерактивних об'єктів та ігрових взаємодій.",
+
+    viewTool: "Переглянути →",
+
+    futureTag: "МАЙБУТНІЙ ІНСТРУМЕНТ",
+    futureTitle: "Більше Unity Tools",
+    futureDescription:
+      "Нові багаторазові Unity-системи та інструменти розробки будуть додаватися сюди в міру їх створення.",
+
+    comingSoon: "Незабаром",
+
+    footer:
+      "Розробка ігор · Unity Tools · Цифрові проєкти"
+  },
+
+
+  ru: {
+    backHome: "← На главную",
+    eyebrow: "РАЗРАБОТКА",
+    title: "Unity Tools",
+    intro:
+      "Растущая коллекция многоразовых Unity-систем и инструментов разработки от Oktavin.exe.",
+
+    toolsTitle: "Инструменты",
+    toolsSubtitle:
+      "Доступные и будущие инструменты для разработки в Unity.",
+
+    interactionTag: "UNITY-СИСТЕМА",
+    interactionDescription:
+      "Многоразовая система взаимодействия для Unity, созданная для упрощения интерактивных объектов и игровых взаимодействий.",
+
+    viewTool: "Открыть →",
+
+    futureTag: "БУДУЩИЙ ИНСТРУМЕНТ",
+    futureTitle: "Больше Unity Tools",
+    futureDescription:
+      "Новые многоразовые Unity-системы и инструменты разработки будут появляться здесь по мере их создания.",
+
+    comingSoon: "Скоро",
+
+    footer:
+      "Разработка игр · Unity Tools · Цифровые проекты"
+  }
+
+};
+
+
+function setLanguage(lang) {
+
+  document.querySelectorAll("[data-i18n]").forEach(element => {
+
+    const key = element.dataset.i18n;
+
+    if (translations[lang] && translations[lang][key]) {
+      element.textContent = translations[lang][key];
+    }
+
+  });
+
+
+  document.querySelectorAll(".lang-btn").forEach(button => {
+
+    button.classList.toggle(
+      "active",
+      button.dataset.lang === lang
+    );
+
+  });
+
+
+  document.documentElement.lang =
+    lang === "ua" ? "uk" : lang;
+
+  localStorage.setItem(
+    "oktavin-language",
+    lang
+  );
+
+}
+
+
+document.querySelectorAll(".lang-btn").forEach(button => {
+
+  button.addEventListener("click", () => {
+
+    setLanguage(
+      button.dataset.lang
+    );
+
+  });
+
+});
+
+
+const savedLanguage =
+  localStorage.getItem("oktavin-language");
+
+if (savedLanguage && translations[savedLanguage]) {
+
+  setLanguage(savedLanguage);
+
+} else {
+
+  const browserLanguage =
+    navigator.language.toLowerCase();
+
+  if (browserLanguage.startsWith("de")) {
+    setLanguage("de");
+  }
+
+  else if (
+    browserLanguage.startsWith("uk") ||
+    browserLanguage.startsWith("ua")
+  ) {
+    setLanguage("ua");
+  }
+
+  else if (browserLanguage.startsWith("ru")) {
+    setLanguage("ru");
+  }
+
+  else {
+    setLanguage("en");
+  }
+
+}
+
+</script>
+
+</body>
+</html>
