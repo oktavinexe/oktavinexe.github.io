@@ -4,9 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Oktavin.exe — Game Development & Unity Tools</title>
+
   <meta
     name="description"
-    content="Official website of Oktavin.exe — indie game development, Unity tools, projects and digital experiments."
+    content="Official website of Oktavin.exe — indie game development, Unity tools and digital projects."
   />
 
   <style>
@@ -47,6 +48,10 @@
       text-decoration: none;
     }
 
+    button {
+      font: inherit;
+    }
+
     .container {
       width: min(1120px, calc(100% - 40px));
       margin: 0 auto;
@@ -74,6 +79,13 @@
       font-weight: 800;
       letter-spacing: 0.08em;
       color: var(--accent);
+      white-space: nowrap;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 22px;
     }
 
     .nav-links {
@@ -85,6 +97,36 @@
 
     .nav-links a:hover {
       color: var(--text);
+    }
+
+    .language-switcher {
+      display: flex;
+      gap: 6px;
+      padding: 5px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: rgba(15, 19, 26, 0.8);
+    }
+
+    .lang-btn {
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      padding: 6px 8px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      transition: 0.2s ease;
+    }
+
+    .lang-btn:hover {
+      color: var(--text);
+    }
+
+    .lang-btn.active {
+      background: var(--accent);
+      color: #04100d;
     }
 
     .hero {
@@ -166,7 +208,7 @@
       border: 1px solid var(--line);
       border-radius: 18px;
       padding: 28px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
     }
 
     .status-line {
@@ -209,7 +251,7 @@
 
     .card {
       background: var(--panel);
-      border: 1px solid rgba(255,255,255,0.06);
+      border: 1px solid rgba(255, 255, 255, 0.06);
       border-radius: 16px;
       padding: 24px;
       transition: 0.2s ease;
@@ -250,13 +292,13 @@
     }
 
     footer {
-      border-top: 1px solid rgba(255,255,255,0.06);
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
       padding: 28px 0;
       color: var(--muted);
       font-size: 0.9rem;
     }
 
-    @media (max-width: 850px) {
+    @media (max-width: 900px) {
       .hero-grid,
       .cards {
         grid-template-columns: 1fr;
@@ -269,6 +311,31 @@
       .hero {
         min-height: auto;
       }
+
+      nav {
+        align-items: flex-start;
+        padding: 16px 0;
+      }
+
+      .nav-right {
+        flex-direction: column-reverse;
+        align-items: flex-end;
+        gap: 10px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .container {
+        width: min(100% - 24px, 1120px);
+      }
+
+      .language-switcher {
+        gap: 2px;
+      }
+
+      .lang-btn {
+        padding: 5px 6px;
+      }
     }
   </style>
 </head>
@@ -279,10 +346,19 @@
       <nav>
         <a class="brand" href="#top">Oktavin.exe</a>
 
-        <div class="nav-links">
-          <a href="#projects">Projects</a>
-          <a href="#about">About</a>
-          <a href="#contact">Contact</a>
+        <div class="nav-right">
+          <div class="nav-links">
+            <a href="#projects" data-i18n="navProjects">Projects</a>
+            <a href="#about" data-i18n="navAbout">About</a>
+            <a href="#contact" data-i18n="navContact">Contact</a>
+          </div>
+
+          <div class="language-switcher" aria-label="Language switcher">
+            <button class="lang-btn" data-lang="en">EN</button>
+            <button class="lang-btn" data-lang="de">DE</button>
+            <button class="lang-btn" data-lang="uk">UA</button>
+            <button class="lang-btn" data-lang="ru">RU</button>
+          </div>
         </div>
       </nav>
     </div>
@@ -292,27 +368,29 @@
     <section class="hero">
       <div class="container hero-grid">
         <div>
-          <div class="eyebrow">Game Development / Unity Tools / Digital Projects</div>
+          <div class="eyebrow" data-i18n="heroEyebrow">
+            Game Development / Unity Tools / Digital Projects
+          </div>
 
           <h1>
             <span class="glitch">Oktavin.exe</span>
           </h1>
 
-          <p>
+          <p data-i18n="heroText">
             Indie development, practical Unity tools and experimental game projects.
             I build systems that are simple to use, easy to understand and useful in real projects.
           </p>
 
           <div class="actions">
-            <a class="btn primary" href="#projects">View Projects</a>
-            <a class="btn" href="#contact">Contact</a>
+            <a class="btn primary" href="#projects" data-i18n="viewProjects">View Projects</a>
+            <a class="btn" href="#contact" data-i18n="contactButton">Contact</a>
           </div>
         </div>
 
         <div class="hero-card">
           <div class="status-line">SYSTEM_STATUS: ONLINE</div>
-          <h3>Current focus</h3>
-          <p>
+          <h3 data-i18n="currentFocusTitle">Current focus</h3>
+          <p data-i18n="currentFocusText">
             Building reusable Unity tools and developing original game projects under the Oktavin.exe brand.
           </p>
         </div>
@@ -321,35 +399,35 @@
 
     <section id="projects">
       <div class="container">
-        <h2 class="section-title">Projects</h2>
-        <p class="section-subtitle">
+        <h2 class="section-title" data-i18n="projectsTitle">Projects</h2>
+
+        <p class="section-subtitle" data-i18n="projectsSubtitle">
           Current and upcoming work in Unity, game development and interactive systems.
         </p>
 
         <div class="cards">
           <article class="card">
-            <div class="tag">Unity Tool</div>
+            <div class="tag" data-i18n="unityToolTag">Unity Tool</div>
             <h3>Easy Interaction System</h3>
-            <p>
+            <p data-i18n="interactionDescription">
               A lightweight interaction system for Unity with raycast interaction,
               UI prompts, interactive doors, buttons, state indicators and ready-to-use prefabs.
             </p>
           </article>
 
           <article class="card">
-            <div class="tag">Game Development</div>
-            <h3>Second Chance Store</h3>
-            <p>
-              A 3D garage and auction simulator focused on buying unknown items,
-              discovering value and growing a small business.
+            <div class="tag" data-i18n="gameDevTag">Game Development</div>
+            <h3 data-i18n="projectsInDevelopmentTitle">Projects in Development</h3>
+            <p data-i18n="projectsInDevelopmentDescription">
+              Exploring game development through original projects, experiments and new ideas.
             </p>
           </article>
 
           <article class="card">
-            <div class="tag">In Development</div>
-            <h3>More Projects</h3>
-            <p>
-              Additional tools, systems and game projects are currently in development.
+            <div class="tag" data-i18n="futureTag">Future Work</div>
+            <h3 data-i18n="moreProjectsTitle">More Projects</h3>
+            <p data-i18n="moreProjectsDescription">
+              Additional tools, systems and game-development projects are planned for future releases.
             </p>
           </article>
         </div>
@@ -358,14 +436,15 @@
 
     <section id="about">
       <div class="container">
-        <h2 class="section-title">About</h2>
-        <p class="section-subtitle">
+        <h2 class="section-title" data-i18n="aboutTitle">About</h2>
+
+        <p class="section-subtitle" data-i18n="aboutSubtitle">
           Oktavin.exe is an independent development brand focused on learning,
           building and publishing practical game-development projects.
         </p>
 
         <div class="contact-box">
-          <p>
+          <p data-i18n="aboutText">
             The goal is simple: create useful systems, release real products,
             improve with every project and document the journey along the way.
           </p>
@@ -375,10 +454,10 @@
 
     <section id="contact">
       <div class="container">
-        <h2 class="section-title">Contact</h2>
+        <h2 class="section-title" data-i18n="contactTitle">Contact</h2>
 
         <div class="contact-box">
-          <strong>Email</strong>
+          <strong data-i18n="emailLabel">Email</strong>
           <p>
             <a href="mailto:oktavin321@gmail.com">oktavin321@gmail.com</a>
           </p>
@@ -387,7 +466,7 @@
 
           <strong>YouTube</strong>
           <p>
-            <a href="https://www.youtube.com/@oktavin_exe" target="_blank">
+            <a href="https://www.youtube.com/@oktavin_exe" target="_blank" rel="noopener noreferrer">
               youtube.com/@oktavin_exe
             </a>
           </p>
@@ -397,9 +476,258 @@
   </main>
 
   <footer>
-    <div class="container">
+    <div class="container" data-i18n="footerText">
       © 2026 Oktavin.exe. All rights reserved.
     </div>
   </footer>
+
+  <script>
+    const translations = {
+      en: {
+        navProjects: "Projects",
+        navAbout: "About",
+        navContact: "Contact",
+
+        heroEyebrow: "Game Development / Unity Tools / Digital Projects",
+
+        heroText:
+          "Indie development, practical Unity tools and experimental game projects. I build systems that are simple to use, easy to understand and useful in real projects.",
+
+        viewProjects: "View Projects",
+        contactButton: "Contact",
+
+        currentFocusTitle: "Current focus",
+        currentFocusText:
+          "Building reusable Unity tools and developing original game projects under the Oktavin.exe brand.",
+
+        projectsTitle: "Projects",
+        projectsSubtitle:
+          "Current and upcoming work in Unity, game development and interactive systems.",
+
+        unityToolTag: "Unity Tool",
+
+        interactionDescription:
+          "A lightweight interaction system for Unity with raycast interaction, UI prompts, interactive doors, buttons, state indicators and ready-to-use prefabs.",
+
+        gameDevTag: "Game Development",
+
+        projectsInDevelopmentTitle: "Projects in Development",
+        projectsInDevelopmentDescription:
+          "Exploring game development through original projects, experiments and new ideas.",
+
+        futureTag: "Future Work",
+        moreProjectsTitle: "More Projects",
+        moreProjectsDescription:
+          "Additional tools, systems and game-development projects are planned for future releases.",
+
+        aboutTitle: "About",
+        aboutSubtitle:
+          "Oktavin.exe is an independent development brand focused on learning, building and publishing practical game-development projects.",
+
+        aboutText:
+          "The goal is simple: create useful systems, release real products, improve with every project and document the journey along the way.",
+
+        contactTitle: "Contact",
+        emailLabel: "Email",
+
+        footerText: "© 2026 Oktavin.exe. All rights reserved."
+      },
+
+      de: {
+        navProjects: "Projekte",
+        navAbout: "Über mich",
+        navContact: "Kontakt",
+
+        heroEyebrow: "Spieleentwicklung / Unity Tools / Digitale Projekte",
+
+        heroText:
+          "Indie-Entwicklung, praktische Unity-Tools und experimentelle Spieleprojekte. Ich entwickle Systeme, die einfach zu verwenden, leicht verständlich und in echten Projekten nützlich sind.",
+
+        viewProjects: "Projekte ansehen",
+        contactButton: "Kontakt",
+
+        currentFocusTitle: "Aktueller Fokus",
+        currentFocusText:
+          "Entwicklung wiederverwendbarer Unity-Tools und eigener Spieleprojekte unter der Marke Oktavin.exe.",
+
+        projectsTitle: "Projekte",
+        projectsSubtitle:
+          "Aktuelle und kommende Arbeiten in Unity, Spieleentwicklung und interaktiven Systemen.",
+
+        unityToolTag: "Unity Tool",
+
+        interactionDescription:
+          "Ein leichtgewichtiges Interaktionssystem für Unity mit Raycast-Interaktion, UI-Hinweisen, interaktiven Türen, Buttons, Statusanzeigen und sofort nutzbaren Prefabs.",
+
+        gameDevTag: "Spieleentwicklung",
+
+        projectsInDevelopmentTitle: "Projekte in Entwicklung",
+        projectsInDevelopmentDescription:
+          "Erkundung der Spieleentwicklung durch eigene Projekte, Experimente und neue Ideen.",
+
+        futureTag: "Zukünftige Arbeit",
+        moreProjectsTitle: "Weitere Projekte",
+        moreProjectsDescription:
+          "Weitere Tools, Systeme und Spieleprojekte sind für zukünftige Veröffentlichungen geplant.",
+
+        aboutTitle: "Über mich",
+        aboutSubtitle:
+          "Oktavin.exe ist eine unabhängige Entwicklungsmarke mit Fokus auf Lernen, Entwickeln und Veröffentlichen praktischer Game-Development-Projekte.",
+
+        aboutText:
+          "Das Ziel ist einfach: nützliche Systeme entwickeln, echte Produkte veröffentlichen, mit jedem Projekt besser werden und den Entwicklungsweg dokumentieren.",
+
+        contactTitle: "Kontakt",
+        emailLabel: "E-Mail",
+
+        footerText: "© 2026 Oktavin.exe. Alle Rechte vorbehalten."
+      },
+
+      uk: {
+        navProjects: "Проєкти",
+        navAbout: "Про мене",
+        navContact: "Контакти",
+
+        heroEyebrow: "Розробка ігор / Unity Tools / Цифрові проєкти",
+
+        heroText:
+          "Інді-розробка, практичні інструменти для Unity та експериментальні ігрові проєкти. Я створюю системи, які прості у використанні, зрозумілі та корисні у реальних проєктах.",
+
+        viewProjects: "Переглянути проєкти",
+        contactButton: "Контакти",
+
+        currentFocusTitle: "Поточний напрям",
+        currentFocusText:
+          "Створення багаторазових інструментів для Unity та розробка власних ігрових проєктів під брендом Oktavin.exe.",
+
+        projectsTitle: "Проєкти",
+        projectsSubtitle:
+          "Поточні та майбутні роботи у Unity, розробці ігор та інтерактивних системах.",
+
+        unityToolTag: "Unity Tool",
+
+        interactionDescription:
+          "Легка система взаємодії для Unity з raycast-взаємодією, UI-підказками, інтерактивними дверима, кнопками, індикаторами стану та готовими до використання prefab-об'єктами.",
+
+        gameDevTag: "Розробка ігор",
+
+        projectsInDevelopmentTitle: "Проєкти в розробці",
+        projectsInDevelopmentDescription:
+          "Дослідження розробки ігор через власні проєкти, експерименти та нові ідеї.",
+
+        futureTag: "Майбутні роботи",
+        moreProjectsTitle: "Більше проєктів",
+        moreProjectsDescription:
+          "Додаткові інструменти, системи та ігрові проєкти заплановані для майбутніх релізів.",
+
+        aboutTitle: "Про мене",
+        aboutSubtitle:
+          "Oktavin.exe — незалежний бренд розробки, зосереджений на навчанні, створенні та публікації практичних проєктів у сфері геймдеву.",
+
+        aboutText:
+          "Мета проста: створювати корисні системи, випускати реальні продукти, ставати кращим з кожним проєктом і документувати шлях розвитку.",
+
+        contactTitle: "Контакти",
+        emailLabel: "Електронна пошта",
+
+        footerText: "© 2026 Oktavin.exe. Усі права захищені."
+      },
+
+      ru: {
+        navProjects: "Проекты",
+        navAbout: "Обо мне",
+        navContact: "Контакты",
+
+        heroEyebrow: "Разработка игр / Unity Tools / Цифровые проекты",
+
+        heroText:
+          "Инди-разработка, практичные инструменты для Unity и экспериментальные игровые проекты. Я создаю системы, которые просты в использовании, понятны и полезны в реальных проектах.",
+
+        viewProjects: "Посмотреть проекты",
+        contactButton: "Контакты",
+
+        currentFocusTitle: "Текущий фокус",
+        currentFocusText:
+          "Создание многоразовых инструментов для Unity и разработка собственных игровых проектов под брендом Oktavin.exe.",
+
+        projectsTitle: "Проекты",
+        projectsSubtitle:
+          "Текущие и будущие работы в Unity, разработке игр и интерактивных системах.",
+
+        unityToolTag: "Unity Tool",
+
+        interactionDescription:
+          "Лёгкая система взаимодействия для Unity с raycast-взаимодействием, UI-подсказками, интерактивными дверями, кнопками, индикаторами состояния и готовыми prefab-объектами.",
+
+        gameDevTag: "Разработка игр",
+
+        projectsInDevelopmentTitle: "Проекты в разработке",
+        projectsInDevelopmentDescription:
+          "Изучение разработки игр через собственные проекты, эксперименты и новые идеи.",
+
+        futureTag: "Будущие работы",
+        moreProjectsTitle: "Больше проектов",
+        moreProjectsDescription:
+          "Дополнительные инструменты, системы и игровые проекты запланированы для будущих релизов.",
+
+        aboutTitle: "Обо мне",
+        aboutSubtitle:
+          "Oktavin.exe — независимый бренд разработки, сосредоточенный на обучении, создании и публикации практических проектов в сфере геймдева.",
+
+        aboutText:
+          "Цель простая: создавать полезные системы, выпускать реальные продукты, становиться лучше с каждым проектом и документировать путь развития.",
+
+        contactTitle: "Контакты",
+        emailLabel: "Электронная почта",
+
+        footerText: "© 2026 Oktavin.exe. Все права защищены."
+      }
+    };
+
+    function setLanguage(lang) {
+      const selected = translations[lang] ? lang : "en";
+      const dict = translations[selected];
+
+      document.documentElement.lang = selected === "uk" ? "uk" : selected;
+
+      document.querySelectorAll("[data-i18n]").forEach((element) => {
+        const key = element.dataset.i18n;
+
+        if (dict[key]) {
+          element.textContent = dict[key];
+        }
+      });
+
+      document.querySelectorAll(".lang-btn").forEach((button) => {
+        button.classList.toggle("active", button.dataset.lang === selected);
+      });
+
+      localStorage.setItem("oktavin-language", selected);
+    }
+
+    document.querySelectorAll(".lang-btn").forEach((button) => {
+      button.addEventListener("click", () => {
+        setLanguage(button.dataset.lang);
+      });
+    });
+
+    const savedLanguage = localStorage.getItem("oktavin-language");
+
+    const browserLanguage = navigator.language.toLowerCase();
+
+    let defaultLanguage = "en";
+
+    if (savedLanguage && translations[savedLanguage]) {
+      defaultLanguage = savedLanguage;
+    } else if (browserLanguage.startsWith("de")) {
+      defaultLanguage = "de";
+    } else if (browserLanguage.startsWith("uk")) {
+      defaultLanguage = "uk";
+    } else if (browserLanguage.startsWith("ru")) {
+      defaultLanguage = "ru";
+    }
+
+    setLanguage(defaultLanguage);
+  </script>
 </body>
 </html>
