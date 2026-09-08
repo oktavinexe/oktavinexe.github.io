@@ -8,7 +8,7 @@
 
   <meta
     name="description"
-    content="Easy Interaction System — a reusable Unity interaction tool by Oktavin.exe."
+    content="Easy Interaction System — a reusable Unity interaction framework by Oktavin.exe."
   >
 
   <style>
@@ -16,8 +16,10 @@
       --bg: #07090d;
       --panel: #0f131a;
       --panel-2: #141a22;
+      --panel-3: #10161e;
       --text: #e9f1f5;
       --muted: #8ea0ad;
+      --soft: #9dbbd0;
       --accent: #58e0c1;
       --accent-2: #9f6bff;
       --line: rgba(88, 224, 193, 0.22);
@@ -40,7 +42,7 @@
         radial-gradient(
           circle at top left,
           rgba(159, 107, 255, 0.10),
-          transparent 28%
+          transparent 27%
         ),
         radial-gradient(
           circle at top right,
@@ -82,11 +84,11 @@
     header {
       position: sticky;
       top: 0;
-      z-index: 30;
+      z-index: 50;
 
       backdrop-filter: blur(14px);
 
-      background: rgba(7, 9, 13, 0.92);
+      background: rgba(7, 9, 13, 0.93);
 
       border-bottom: 1px solid var(--line);
     }
@@ -119,6 +121,7 @@
     .back-link {
       color: var(--muted);
       transition: 0.2s ease;
+      white-space: nowrap;
     }
 
     .back-link:hover {
@@ -139,11 +142,8 @@
 
     .lang-btn {
       border: 0;
-
       background: transparent;
-
       color: var(--muted);
-
       cursor: pointer;
 
       padding: 6px 8px;
@@ -165,46 +165,75 @@
       color: #04100d;
     }
 
-    /* HERO */
+    /* GENERAL */
 
-    .hero {
-      padding: 90px 0 80px;
+    section {
+      padding: 80px 0;
     }
 
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 48px;
-      align-items: center;
+    section + section {
+      border-top: 1px solid var(--border);
     }
 
     .eyebrow {
       color: var(--accent);
+
       text-transform: uppercase;
+
       letter-spacing: 0.16em;
+
       font-size: 0.78rem;
       font-weight: 700;
-      margin-bottom: 16px;
+
+      margin-bottom: 15px;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 2.7rem);
+      margin-bottom: 12px;
+    }
+
+    .section-subtitle {
+      max-width: 800px;
+
+      color: var(--muted);
+
+      font-size: 1.05rem;
+
+      margin-bottom: 36px;
+    }
+
+    /* HERO */
+
+    .hero {
+      padding: 105px 0 90px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 54px;
+      align-items: center;
     }
 
     h1 {
-      font-size: clamp(3rem, 7vw, 6rem);
-      line-height: 1;
-      letter-spacing: -0.04em;
-      margin-bottom: 24px;
+      font-size: clamp(3.2rem, 7vw, 6.3rem);
+      line-height: 0.98;
+      letter-spacing: -0.045em;
+      margin-bottom: 25px;
     }
 
     .hero-text {
-      color: #9dbbd0;
-      font-size: 1.18rem;
-      max-width: 760px;
+      color: var(--soft);
+      font-size: 1.2rem;
+      max-width: 780px;
     }
 
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 14px;
-      margin-top: 30px;
+      margin-top: 32px;
     }
 
     .btn {
@@ -213,7 +242,6 @@
       padding: 13px 20px;
 
       border-radius: 10px;
-
       border: 1px solid var(--line);
 
       background: var(--panel);
@@ -233,8 +261,8 @@
 
     .btn.primary {
       background: var(--accent);
-      color: #04100d;
       border-color: var(--accent);
+      color: #04100d;
     }
 
     .btn.disabled {
@@ -252,24 +280,46 @@
       background:
         linear-gradient(
           180deg,
-          rgba(20, 26, 34, 0.96),
-          rgba(10, 13, 18, 0.96)
+          rgba(20, 26, 34, 0.98),
+          rgba(10, 13, 18, 0.98)
         );
 
       border: 1px solid var(--line);
-      border-radius: 18px;
 
-      padding: 28px;
+      border-radius: 20px;
+
+      padding: 30px;
+
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.30);
     }
 
-    .hero-card .status {
-      color: var(--accent);
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
       font-family: Consolas, monospace;
-      margin-bottom: 12px;
+
+      color: var(--accent);
+
+      font-size: 0.9rem;
+
+      margin-bottom: 18px;
+    }
+
+    .status-dot {
+      width: 9px;
+      height: 9px;
+
+      border-radius: 50%;
+
+      background: var(--accent);
+
+      box-shadow: 0 0 14px rgba(88, 224, 193, 0.85);
     }
 
     .hero-card h3 {
-      font-size: 1.35rem;
+      font-size: 1.4rem;
       margin-bottom: 10px;
     }
 
@@ -277,26 +327,59 @@
       color: var(--muted);
     }
 
-    /* SECTIONS */
+    .quick-list {
+      margin-top: 24px;
 
-    section {
-      padding: 75px 0;
+      display: grid;
+      gap: 10px;
     }
 
-    section + section {
-      border-top: 1px solid var(--border);
+    .quick-item {
+      padding: 11px 13px;
+
+      background: rgba(255, 255, 255, 0.025);
+
+      border: 1px solid var(--border);
+      border-radius: 9px;
+
+      color: var(--soft);
+
+      font-size: 0.92rem;
     }
 
-    .section-title {
-      font-size: 2.15rem;
+    /* WHY */
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .why-card {
+      background: var(--panel);
+
+      border: 1px solid var(--border);
+
+      border-radius: 16px;
+
+      padding: 26px;
+    }
+
+    .why-number {
+      color: var(--accent);
+
+      font-family: Consolas, monospace;
+
       margin-bottom: 12px;
     }
 
-    .section-subtitle {
+    .why-card h3 {
+      margin-bottom: 9px;
+      font-size: 1.15rem;
+    }
+
+    .why-card p {
       color: var(--muted);
-      max-width: 780px;
-      font-size: 1.02rem;
-      margin-bottom: 34px;
     }
 
     /* FEATURES */
@@ -309,17 +392,33 @@
 
     .feature-card {
       background: var(--panel);
+
       border: 1px solid var(--border);
+
       border-radius: 16px;
-      padding: 24px;
+
+      padding: 25px;
+
+      transition:
+        transform 0.2s ease,
+        border-color 0.2s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--line);
     }
 
     .feature-tag {
       color: var(--accent);
-      font-size: 0.78rem;
-      letter-spacing: 0.12em;
+
+      font-size: 0.76rem;
+
+      letter-spacing: 0.13em;
+
       text-transform: uppercase;
-      margin-bottom: 8px;
+
+      margin-bottom: 9px;
     }
 
     .feature-card h3 {
@@ -334,42 +433,70 @@
 
     /* DEMO */
 
-    .demo-box {
-      background: var(--panel-2);
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 30px;
+    .demo-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
     }
 
-    .demo-placeholder {
-      margin-top: 25px;
-      min-height: 240px;
+    .media-box {
+      min-height: 330px;
 
       display: grid;
       place-items: center;
 
-      border: 1px dashed var(--line);
-      border-radius: 14px;
+      padding: 35px;
 
-      color: var(--muted);
       text-align: center;
 
-      padding: 30px;
+      background:
+        linear-gradient(
+          145deg,
+          rgba(88, 224, 193, 0.04),
+          rgba(159, 107, 255, 0.04)
+        ),
+        var(--panel);
+
+      border: 1px dashed var(--line);
+
+      border-radius: 18px;
+    }
+
+    .media-icon {
+      font-size: 2rem;
+      margin-bottom: 12px;
+    }
+
+    .media-box strong {
+      display: block;
+      font-size: 1.15rem;
+      margin-bottom: 8px;
+    }
+
+    .media-box p {
+      color: var(--muted);
+      max-width: 400px;
     }
 
     /* INCLUDED */
 
     .included-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+
+      grid-template-columns:
+        repeat(auto-fit, minmax(250px, 1fr));
+
       gap: 20px;
     }
 
     .included-card {
       background: var(--panel);
+
       border: 1px solid var(--border);
+
       border-radius: 16px;
-      padding: 24px;
+
+      padding: 25px;
     }
 
     .included-card strong {
@@ -381,17 +508,47 @@
       color: var(--muted);
     }
 
+    /* PACKAGE TREE */
+
+    .package-tree {
+      margin-top: 28px;
+
+      background: #090c11;
+
+      border: 1px solid var(--border);
+
+      border-radius: 14px;
+
+      padding: 24px;
+
+      font-family: Consolas, monospace;
+
+      color: var(--soft);
+
+      overflow-x: auto;
+
+      white-space: pre;
+    }
+
     /* TECH */
+
+    .tech-wrap {
+      overflow: hidden;
+
+      background: var(--panel);
+
+      border: 1px solid var(--border);
+
+      border-radius: 16px;
+    }
 
     .tech-table {
       width: 100%;
       border-collapse: collapse;
-      overflow: hidden;
-      border-radius: 14px;
     }
 
     .tech-table td {
-      padding: 16px 18px;
+      padding: 17px 19px;
       border-bottom: 1px solid var(--border);
     }
 
@@ -401,7 +558,9 @@
 
     .tech-table td:first-child {
       width: 34%;
+
       color: var(--text);
+
       font-weight: 700;
     }
 
@@ -409,20 +568,16 @@
       color: var(--muted);
     }
 
-    .tech-wrap {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      overflow: hidden;
-    }
-
     /* DOCUMENTATION */
 
     .info-box {
       background: var(--panel-2);
+
       border: 1px solid var(--line);
+
       border-radius: 18px;
-      padding: 28px;
+
+      padding: 30px;
     }
 
     .info-box p {
@@ -432,30 +587,37 @@
     /* PURCHASE */
 
     .purchase-card {
+      display: grid;
+
+      grid-template-columns: 1fr auto;
+
+      align-items: center;
+
+      gap: 30px;
+
       background:
         linear-gradient(
-          180deg,
-          rgba(20, 26, 34, 0.98),
-          rgba(10, 13, 18, 0.98)
-        );
+          135deg,
+          rgba(88, 224, 193, 0.08),
+          rgba(159, 107, 255, 0.05)
+        ),
+        var(--panel-2);
 
       border: 1px solid var(--line);
-      border-radius: 20px;
-      padding: 34px;
+
+      border-radius: 22px;
+
+      padding: 36px;
     }
 
-    .purchase-card h3 {
-      font-size: 1.8rem;
-      margin-bottom: 10px;
+    .purchase-card h2 {
+      font-size: 2rem;
+      margin-bottom: 8px;
     }
 
     .purchase-card p {
+      max-width: 720px;
       color: var(--muted);
-      max-width: 700px;
-    }
-
-    .purchase-actions {
-      margin-top: 24px;
     }
 
     /* FOOTER */
@@ -466,16 +628,25 @@
 
     .footer-inner {
       padding: 30px 0;
+
       display: flex;
       justify-content: space-between;
+
       gap: 20px;
+
       color: var(--muted);
     }
 
     /* MOBILE */
 
     @media (max-width: 900px) {
-      .hero-grid {
+      .hero-grid,
+      .demo-layout,
+      .purchase-card {
+        grid-template-columns: 1fr;
+      }
+
+      .why-grid {
         grid-template-columns: 1fr;
       }
 
@@ -496,12 +667,20 @@
         width: min(100% - 24px, 1200px);
       }
 
-      .footer-inner {
-        flex-direction: column;
+      .language-switcher {
+        gap: 2px;
+      }
+
+      .lang-btn {
+        padding: 5px 6px;
       }
 
       .tech-table td:first-child {
-        width: 42%;
+        width: 43%;
+      }
+
+      .footer-inner {
+        flex-direction: column;
       }
     }
   </style>
@@ -519,8 +698,8 @@
     <div class="nav-right">
 
       <a
-        class="back-link"
         href="/unity-tools/"
+        class="back-link"
         data-i18n="back"
       >
         ← Back to Unity Tools
@@ -550,7 +729,7 @@
       <div>
 
         <div class="eyebrow" data-i18n="eyebrow">
-          UNITY TOOL
+          UNITY DEVELOPMENT TOOL
         </div>
 
         <h1>
@@ -558,62 +737,156 @@
         </h1>
 
         <p class="hero-text" data-i18n="heroText">
-          A reusable interaction framework for Unity designed to make
-          interactive objects easier to build, configure and reuse.
+          A reusable Unity interaction framework designed to make
+          common gameplay interactions faster to create,
+          easier to configure and simpler to reuse.
         </p>
 
         <div class="hero-actions">
 
-          <a class="btn primary" href="#features" data-i18n="featuresButton">
+          <a
+            class="btn primary"
+            href="#features"
+            data-i18n="featuresButton"
+          >
             Explore Features
           </a>
 
-          <span class="btn disabled" data-i18n="comingSoonButton">
-            Coming Soon
-          </span>
+          <a
+            class="btn"
+            href="#demo"
+            data-i18n="demoButton"
+          >
+            View Demo
+          </a>
 
         </div>
 
       </div>
 
 
-      <div class="hero-card">
+      <aside class="hero-card">
 
         <div class="status">
-          PRODUCT_STATUS: IN DEVELOPMENT
+          <span class="status-dot"></span>
+
+          <span data-i18n="status">
+            IN DEVELOPMENT
+          </span>
         </div>
 
-        <h3 data-i18n="statusTitle">
-          Built as a reusable Unity system
+        <h3 data-i18n="heroCardTitle">
+          Built for reusable interactions
         </h3>
 
-        <p data-i18n="statusText">
-          Designed around modular interaction components, Inspector configuration
-          and reusable prefabs.
+        <p data-i18n="heroCardText">
+          Configure common interaction behaviour directly in Unity
+          and reuse the same system across scenes and projects.
         </p>
 
-      </div>
+        <div class="quick-list">
+
+          <div class="quick-item" data-i18n="quick1">
+            ✓ Camera raycast interaction
+          </div>
+
+          <div class="quick-item" data-i18n="quick2">
+            ✓ Inspector configuration
+          </div>
+
+          <div class="quick-item" data-i18n="quick3">
+            ✓ Reusable prefabs
+          </div>
+
+          <div class="quick-item" data-i18n="quick4">
+            ✓ Demo scene & documentation
+          </div>
+
+        </div>
+
+      </aside>
 
     </div>
 
   </section>
 
 
-  <!-- ABOUT -->
+  <!-- WHY -->
 
   <section>
 
     <div class="container">
 
-      <h2 class="section-title" data-i18n="aboutTitle">
-        What is Easy Interaction System?
+      <div class="eyebrow" data-i18n="whyEyebrow">
+        WHY EASY INTERACTION SYSTEM?
+      </div>
+
+      <h2 class="section-title" data-i18n="whyTitle">
+        Spend less time rebuilding basic interaction logic
       </h2>
 
-      <p class="section-subtitle" data-i18n="aboutText">
-        Easy Interaction System is a reusable Unity interaction framework
-        that allows developers to build and configure common gameplay
-        interactions without rebuilding the same logic for every project.
+      <p class="section-subtitle" data-i18n="whySubtitle">
+        Easy Interaction System is designed to provide a reusable foundation
+        for common first-person interactions in Unity projects.
       </p>
+
+
+      <div class="why-grid">
+
+        <article class="why-card">
+
+          <div class="why-number">
+            01
+          </div>
+
+          <h3 data-i18n="why1Title">
+            Reusable
+          </h3>
+
+          <p data-i18n="why1Text">
+            Use the same interaction foundation across multiple scenes
+            instead of rebuilding the system every time.
+          </p>
+
+        </article>
+
+
+        <article class="why-card">
+
+          <div class="why-number">
+            02
+          </div>
+
+          <h3 data-i18n="why2Title">
+            Inspector Friendly
+          </h3>
+
+          <p data-i18n="why2Text">
+            Configure prompts, references, colors, interaction distance
+            and events directly from the Unity Inspector.
+          </p>
+
+        </article>
+
+
+        <article class="why-card">
+
+          <div class="why-number">
+            03
+          </div>
+
+          <h3 data-i18n="why3Title">
+            Ready to Test
+          </h3>
+
+          <p data-i18n="why3Text">
+            A demo setup helps developers quickly understand
+            how the system works before integrating it.
+          </p>
+
+        </article>
+
+      </div>
 
     </div>
 
@@ -626,86 +899,159 @@
 
     <div class="container">
 
+      <div class="eyebrow">
+        FEATURES
+      </div>
+
       <h2 class="section-title" data-i18n="featuresTitle">
-        Features
+        Current Features
       </h2>
 
       <p class="section-subtitle" data-i18n="featuresSubtitle">
-        Current confirmed functionality included in the system.
+        These are the current confirmed systems included in
+        Easy Interaction System.
       </p>
 
 
       <div class="features-grid">
 
         <article class="feature-card">
-          <div class="feature-tag">RAYCAST</div>
-          <h3 data-i18n="feature1Title">Raycast Interaction</h3>
+
+          <div class="feature-tag">
+            RAYCAST
+          </div>
+
+          <h3 data-i18n="feature1Title">
+            Raycast Interaction
+          </h3>
+
           <p data-i18n="feature1Text">
             Detect interactive objects directly from the player camera.
           </p>
+
         </article>
 
 
         <article class="feature-card">
-          <div class="feature-tag">UI</div>
-          <h3 data-i18n="feature2Title">Interaction Prompts</h3>
+
+          <div class="feature-tag">
+            UI
+          </div>
+
+          <h3 data-i18n="feature2Title">
+            Interaction Prompts
+          </h3>
+
           <p data-i18n="feature2Text">
-            Show contextual interaction text when the player looks at an interactive object.
+            Display contextual interaction text when the player targets
+            an interactive object.
           </p>
+
         </article>
 
 
         <article class="feature-card">
-          <div class="feature-tag">OBJECTS</div>
-          <h3 data-i18n="feature3Title">Interactive Doors</h3>
+
+          <div class="feature-tag">
+            DOORS
+          </div>
+
+          <h3 data-i18n="feature3Title">
+            Interactive Doors
+          </h3>
+
           <p data-i18n="feature3Text">
-            Ready-to-use door interactions for opening and closing gameplay objects.
+            Ready-to-use door interactions for opening and closing objects.
           </p>
+
         </article>
 
 
         <article class="feature-card">
-          <div class="feature-tag">OBJECTS</div>
-          <h3 data-i18n="feature4Title">Interactive Buttons</h3>
+
+          <div class="feature-tag">
+            BUTTONS
+          </div>
+
+          <h3 data-i18n="feature4Title">
+            Interactive Buttons
+          </h3>
+
           <p data-i18n="feature4Text">
-            Trigger actions through reusable interactive button components.
+            Reusable interactive buttons can trigger configured gameplay actions.
           </p>
+
         </article>
 
 
         <article class="feature-card">
-          <div class="feature-tag">STATE</div>
-          <h3 data-i18n="feature5Title">State Indicators</h3>
+
+          <div class="feature-tag">
+            STATE
+          </div>
+
+          <h3 data-i18n="feature5Title">
+            State Indicators
+          </h3>
+
           <p data-i18n="feature5Text">
-            Visual indicators can reflect object states such as open and closed.
+            Visual indicators can display object states such as open or closed.
           </p>
+
         </article>
 
 
         <article class="feature-card">
-          <div class="feature-tag">EVENTS</div>
-          <h3 data-i18n="feature6Title">Unity Events</h3>
+
+          <div class="feature-tag">
+            EVENTS
+          </div>
+
+          <h3 data-i18n="feature6Title">
+            Unity Events
+          </h3>
+
           <p data-i18n="feature6Text">
-            Connect button interactions to additional gameplay actions through the Inspector.
+            Connect button interactions to additional actions directly
+            through the Inspector.
           </p>
+
         </article>
 
 
         <article class="feature-card">
-          <div class="feature-tag">INSPECTOR</div>
-          <h3 data-i18n="feature7Title">Inspector Configuration</h3>
+
+          <div class="feature-tag">
+            INSPECTOR
+          </div>
+
+          <h3 data-i18n="feature7Title">
+            Inspector Configuration
+          </h3>
+
           <p data-i18n="feature7Text">
-            Configure prompts, interaction distance, references, colors and events directly in Unity.
+            Configure interaction distance, prompts, references,
+            colors and events directly in Unity.
           </p>
+
         </article>
 
 
         <article class="feature-card">
-          <div class="feature-tag">PREFABS</div>
-          <h3 data-i18n="feature8Title">Reusable Prefabs</h3>
+
+          <div class="feature-tag">
+            PREFABS
+          </div>
+
+          <h3 data-i18n="feature8Title">
+            Reusable Prefabs
+          </h3>
+
           <p data-i18n="feature8Text">
-            Ready-made prefabs make it easier to move the system between scenes and projects.
+            Ready-made prefabs simplify moving and reusing
+            the interaction system between scenes.
           </p>
+
         </article>
 
       </div>
@@ -717,23 +1063,67 @@
 
   <!-- DEMO -->
 
-  <section>
+  <section id="demo">
 
     <div class="container">
 
+      <div class="eyebrow" data-i18n="demoEyebrow">
+        SEE IT IN ACTION
+      </div>
+
       <h2 class="section-title" data-i18n="demoTitle">
-        Demo
+        Demo & Preview
       </h2>
 
-      <div class="demo-box">
+      <p class="section-subtitle" data-i18n="demoSubtitle">
+        The demo scene showcases the system working with a door,
+        an interactive button, UI prompts and state indicators.
+      </p>
 
-        <p data-i18n="demoText">
-          A dedicated demo scene is included to demonstrate the interaction system,
-          door controls, buttons, prompts and state indicators.
-        </p>
 
-        <div class="demo-placeholder" data-i18n="demoPlaceholder">
-          Screenshots and video demonstration will be added here before release.
+      <div class="demo-layout">
+
+        <div class="media-box">
+
+          <div>
+
+            <div class="media-icon">
+              ▶
+            </div>
+
+            <strong data-i18n="videoTitle">
+              Video Demonstration
+            </strong>
+
+            <p data-i18n="videoText">
+              A short gameplay demonstration will be added here
+              before the public release.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="media-box">
+
+          <div>
+
+            <div class="media-icon">
+              ▣
+            </div>
+
+            <strong data-i18n="screensTitle">
+              Screenshots
+            </strong>
+
+            <p data-i18n="screensText">
+              Product screenshots from the Unity demo scene
+              and Inspector setup will be added here.
+            </p>
+
+          </div>
+
         </div>
 
       </div>
@@ -749,49 +1139,108 @@
 
     <div class="container">
 
+      <div class="eyebrow" data-i18n="includedEyebrow">
+        PACKAGE CONTENTS
+      </div>
+
       <h2 class="section-title" data-i18n="includedTitle">
         What's Included
       </h2>
 
       <p class="section-subtitle" data-i18n="includedSubtitle">
-        The package is structured for quick testing and integration.
+        Easy Interaction System is organized as a self-contained Unity package
+        with the core system, examples and documentation.
       </p>
 
 
       <div class="included-grid">
 
         <article class="included-card">
-          <strong data-i18n="included1Title">Scripts</strong>
+
+          <strong data-i18n="included1Title">
+            Core Scripts
+          </strong>
+
           <p data-i18n="included1Text">
-            Core interaction, button, door, UI and demo-controller scripts.
+            Interaction, raycast, UI, button, door and state-indicator logic.
           </p>
+
         </article>
 
 
         <article class="included-card">
-          <strong data-i18n="included2Title">Prefabs</strong>
+
+          <strong data-i18n="included2Title">
+            Reusable Prefabs
+          </strong>
+
           <p data-i18n="included2Text">
-            Reusable setup and demonstration prefabs.
+            Ready-made system and demonstration prefabs.
           </p>
+
         </article>
 
 
         <article class="included-card">
-          <strong data-i18n="included3Title">Demo Scene</strong>
+
+          <strong data-i18n="included3Title">
+            Demo Scene
+          </strong>
+
           <p data-i18n="included3Text">
-            A ready-to-run scene showing the interaction system in action.
+            A ready-to-run example scene showing the system in action.
           </p>
+
         </article>
 
 
         <article class="included-card">
-          <strong data-i18n="included4Title">Documentation</strong>
+
+          <strong data-i18n="included4Title">
+            Demo Controller
+          </strong>
+
           <p data-i18n="included4Text">
-            Setup information and README documentation are included with the project.
+            Basic movement and camera scripts for quickly testing the system.
           </p>
+
+        </article>
+
+
+        <article class="included-card">
+
+          <strong data-i18n="included5Title">
+            UI Setup
+          </strong>
+
+          <p data-i18n="included5Text">
+            Interaction canvas and prompt components ready for demonstration.
+          </p>
+
+        </article>
+
+
+        <article class="included-card">
+
+          <strong data-i18n="included6Title">
+            Documentation
+          </strong>
+
+          <p data-i18n="included6Text">
+            README and setup information included with the package.
+          </p>
+
         </article>
 
       </div>
+
+
+      <div class="package-tree">EasyInteractionSystem/
+├── Documentation/
+├── Materials/
+├── Prefabs/
+├── Scenes/
+└── Scripts/</div>
 
     </div>
 
@@ -804,51 +1253,90 @@
 
     <div class="container">
 
+      <div class="eyebrow">
+        TECHNICAL
+      </div>
+
       <h2 class="section-title" data-i18n="technicalTitle">
         Technical Information
       </h2>
+
+      <p class="section-subtitle" data-i18n="technicalSubtitle">
+        Final Unity version compatibility will be confirmed before release.
+      </p>
+
 
       <div class="tech-wrap">
 
         <table class="tech-table">
 
           <tr>
-            <td data-i18n="tech1Label">Engine</td>
-            <td>Unity</td>
+            <td data-i18n="tech1Label">
+              Engine
+            </td>
+
+            <td>
+              Unity
+            </td>
           </tr>
 
           <tr>
-            <td data-i18n="tech2Label">Configuration</td>
+            <td data-i18n="tech2Label">
+              Interaction
+            </td>
+
             <td data-i18n="tech2Value">
-              Inspector-based
+              Camera Raycast
             </td>
           </tr>
 
           <tr>
-            <td data-i18n="tech3Label">Interaction Method</td>
+            <td data-i18n="tech3Label">
+              Configuration
+            </td>
+
             <td data-i18n="tech3Value">
-              Camera raycast
+              Unity Inspector
             </td>
           </tr>
 
           <tr>
-            <td data-i18n="tech4Label">Demo Controller</td>
-            <td data-i18n="tech4Value">
+            <td data-i18n="tech4Label">
+              Unity Events
+            </td>
+
+            <td data-i18n="includedValue">
               Included
             </td>
           </tr>
 
           <tr>
-            <td data-i18n="tech5Label">Documentation</td>
-            <td data-i18n="tech5Value">
+            <td data-i18n="tech5Label">
+              Demo Scene
+            </td>
+
+            <td data-i18n="includedValue">
               Included
             </td>
           </tr>
 
           <tr>
-            <td data-i18n="tech6Label">Release Status</td>
-            <td data-i18n="tech6Value">
-              In development
+            <td data-i18n="tech6Label">
+              Documentation
+            </td>
+
+            <td data-i18n="includedValue">
+              Included
+            </td>
+          </tr>
+
+          <tr>
+            <td data-i18n="tech7Label">
+              Status
+            </td>
+
+            <td data-i18n="developmentValue">
+              In Development
             </td>
           </tr>
 
@@ -867,16 +1355,21 @@
 
     <div class="container">
 
+      <div class="eyebrow">
+        SUPPORT
+      </div>
+
       <h2 class="section-title" data-i18n="documentationTitle">
         Documentation & Support
       </h2>
 
+
       <div class="info-box">
 
         <p data-i18n="documentationText">
-          Documentation is included with the package.
-          Additional online documentation and support information
-          can be published here as the project approaches release.
+          Setup documentation is included with the package.
+          Additional online documentation, examples and support information
+          can be added to the Oktavin.exe website as the product develops.
         </p>
 
       </div>
@@ -894,23 +1387,32 @@
 
       <div class="purchase-card">
 
-        <div class="eyebrow" data-i18n="purchaseEyebrow">
-          RELEASE
+        <div>
+
+          <div class="eyebrow" data-i18n="purchaseEyebrow">
+            UNITY ASSET STORE
+          </div>
+
+          <h2>
+            Easy Interaction System
+          </h2>
+
+          <p data-i18n="purchaseText">
+            Easy Interaction System is currently being prepared for release.
+            The official Unity Asset Store purchase link will appear here
+            when the product is published.
+          </p>
+
         </div>
 
-        <h3>
-          Easy Interaction System
-        </h3>
 
-        <p data-i18n="purchaseText">
-          The product is currently being prepared for release.
-          Purchase information will appear here when the Asset Store version is available.
-        </p>
+        <div>
 
-        <div class="purchase-actions">
-
-          <span class="btn disabled" data-i18n="purchaseButton">
-            Coming Soon on Unity Asset Store
+          <span
+            class="btn disabled"
+            data-i18n="purchaseButton"
+          >
+            Coming Soon
           </span>
 
         </div>
@@ -932,7 +1434,7 @@
       © 2026 Oktavin.exe
     </span>
 
-    <span data-i18n="footerText">
+    <span data-i18n="footer">
       Game Development · Unity Tools · Digital Projects
     </span>
 
@@ -947,466 +1449,765 @@ const translations = {
 
   en: {
     back: "← Back to Unity Tools",
-    eyebrow: "UNITY TOOL",
+
+    eyebrow: "UNITY DEVELOPMENT TOOL",
+
     heroText:
-      "A reusable interaction framework for Unity designed to make interactive objects easier to build, configure and reuse.",
+      "A reusable Unity interaction framework designed to make common gameplay interactions faster to create, easier to configure and simpler to reuse.",
+
     featuresButton: "Explore Features",
-    comingSoonButton: "Coming Soon",
+    demoButton: "View Demo",
 
-    statusTitle: "Built as a reusable Unity system",
-    statusText:
-      "Designed around modular interaction components, Inspector configuration and reusable prefabs.",
+    status: "IN DEVELOPMENT",
 
-    aboutTitle: "What is Easy Interaction System?",
-    aboutText:
-      "Easy Interaction System is a reusable Unity interaction framework that allows developers to build and configure common gameplay interactions without rebuilding the same logic for every project.",
+    heroCardTitle: "Built for reusable interactions",
 
-    featuresTitle: "Features",
-    featuresSubtitle: "Current confirmed functionality included in the system.",
+    heroCardText:
+      "Configure common interaction behaviour directly in Unity and reuse the same system across scenes and projects.",
+
+    quick1: "✓ Camera raycast interaction",
+    quick2: "✓ Inspector configuration",
+    quick3: "✓ Reusable prefabs",
+    quick4: "✓ Demo scene & documentation",
+
+    whyEyebrow: "WHY EASY INTERACTION SYSTEM?",
+
+    whyTitle:
+      "Spend less time rebuilding basic interaction logic",
+
+    whySubtitle:
+      "Easy Interaction System is designed to provide a reusable foundation for common first-person interactions in Unity projects.",
+
+    why1Title: "Reusable",
+
+    why1Text:
+      "Use the same interaction foundation across multiple scenes instead of rebuilding the system every time.",
+
+    why2Title: "Inspector Friendly",
+
+    why2Text:
+      "Configure prompts, references, colors, interaction distance and events directly from the Unity Inspector.",
+
+    why3Title: "Ready to Test",
+
+    why3Text:
+      "A demo setup helps developers quickly understand how the system works before integrating it.",
+
+    featuresTitle: "Current Features",
+
+    featuresSubtitle:
+      "These are the current confirmed systems included in Easy Interaction System.",
 
     feature1Title: "Raycast Interaction",
-    feature1Text: "Detect interactive objects directly from the player camera.",
+
+    feature1Text:
+      "Detect interactive objects directly from the player camera.",
 
     feature2Title: "Interaction Prompts",
+
     feature2Text:
-      "Show contextual interaction text when the player looks at an interactive object.",
+      "Display contextual interaction text when the player targets an interactive object.",
 
     feature3Title: "Interactive Doors",
+
     feature3Text:
-      "Ready-to-use door interactions for opening and closing gameplay objects.",
+      "Ready-to-use door interactions for opening and closing objects.",
 
     feature4Title: "Interactive Buttons",
+
     feature4Text:
-      "Trigger actions through reusable interactive button components.",
+      "Reusable interactive buttons can trigger configured gameplay actions.",
 
     feature5Title: "State Indicators",
+
     feature5Text:
-      "Visual indicators can reflect object states such as open and closed.",
+      "Visual indicators can display object states such as open or closed.",
 
     feature6Title: "Unity Events",
+
     feature6Text:
-      "Connect button interactions to additional gameplay actions through the Inspector.",
+      "Connect button interactions to additional actions directly through the Inspector.",
 
     feature7Title: "Inspector Configuration",
+
     feature7Text:
-      "Configure prompts, interaction distance, references, colors and events directly in Unity.",
+      "Configure interaction distance, prompts, references, colors and events directly in Unity.",
 
     feature8Title: "Reusable Prefabs",
-    feature8Text:
-      "Ready-made prefabs make it easier to move the system between scenes and projects.",
 
-    demoTitle: "Demo",
-    demoText:
-      "A dedicated demo scene is included to demonstrate the interaction system, door controls, buttons, prompts and state indicators.",
-    demoPlaceholder:
-      "Screenshots and video demonstration will be added here before release.",
+    feature8Text:
+      "Ready-made prefabs simplify moving and reusing the interaction system between scenes.",
+
+    demoEyebrow: "SEE IT IN ACTION",
+
+    demoTitle: "Demo & Preview",
+
+    demoSubtitle:
+      "The demo scene showcases the system working with a door, an interactive button, UI prompts and state indicators.",
+
+    videoTitle: "Video Demonstration",
+
+    videoText:
+      "A short gameplay demonstration will be added here before the public release.",
+
+    screensTitle: "Screenshots",
+
+    screensText:
+      "Product screenshots from the Unity demo scene and Inspector setup will be added here.",
+
+    includedEyebrow: "PACKAGE CONTENTS",
 
     includedTitle: "What's Included",
+
     includedSubtitle:
-      "The package is structured for quick testing and integration.",
+      "Easy Interaction System is organized as a self-contained Unity package with the core system, examples and documentation.",
 
-    included1Title: "Scripts",
+    included1Title: "Core Scripts",
+
     included1Text:
-      "Core interaction, button, door, UI and demo-controller scripts.",
+      "Interaction, raycast, UI, button, door and state-indicator logic.",
 
-    included2Title: "Prefabs",
+    included2Title: "Reusable Prefabs",
+
     included2Text:
-      "Reusable setup and demonstration prefabs.",
+      "Ready-made system and demonstration prefabs.",
 
     included3Title: "Demo Scene",
-    included3Text:
-      "A ready-to-run scene showing the interaction system in action.",
 
-    included4Title: "Documentation",
+    included3Text:
+      "A ready-to-run example scene showing the system in action.",
+
+    included4Title: "Demo Controller",
+
     included4Text:
-      "Setup information and README documentation are included with the project.",
+      "Basic movement and camera scripts for quickly testing the system.",
+
+    included5Title: "UI Setup",
+
+    included5Text:
+      "Interaction canvas and prompt components ready for demonstration.",
+
+    included6Title: "Documentation",
+
+    included6Text:
+      "README and setup information included with the package.",
 
     technicalTitle: "Technical Information",
 
+    technicalSubtitle:
+      "Final Unity version compatibility will be confirmed before release.",
+
     tech1Label: "Engine",
-    tech2Label: "Configuration",
-    tech2Value: "Inspector-based",
+    tech2Label: "Interaction",
+    tech2Value: "Camera Raycast",
 
-    tech3Label: "Interaction Method",
-    tech3Value: "Camera raycast",
+    tech3Label: "Configuration",
+    tech3Value: "Unity Inspector",
 
-    tech4Label: "Demo Controller",
-    tech4Value: "Included",
+    tech4Label: "Unity Events",
+    tech5Label: "Demo Scene",
+    tech6Label: "Documentation",
+    tech7Label: "Status",
 
-    tech5Label: "Documentation",
-    tech5Value: "Included",
-
-    tech6Label: "Release Status",
-    tech6Value: "In development",
+    includedValue: "Included",
+    developmentValue: "In Development",
 
     documentationTitle: "Documentation & Support",
+
     documentationText:
-      "Documentation is included with the package. Additional online documentation and support information can be published here as the project approaches release.",
+      "Setup documentation is included with the package. Additional online documentation, examples and support information can be added to the Oktavin.exe website as the product develops.",
 
-    purchaseEyebrow: "RELEASE",
+    purchaseEyebrow: "UNITY ASSET STORE",
+
     purchaseText:
-      "The product is currently being prepared for release. Purchase information will appear here when the Asset Store version is available.",
+      "Easy Interaction System is currently being prepared for release. The official Unity Asset Store purchase link will appear here when the product is published.",
 
-    purchaseButton:
-      "Coming Soon on Unity Asset Store",
+    purchaseButton: "Coming Soon",
 
-    footerText:
+    footer:
       "Game Development · Unity Tools · Digital Projects"
   },
 
 
   de: {
     back: "← Zurück zu Unity Tools",
-    eyebrow: "UNITY-TOOL",
+
+    eyebrow: "UNITY-ENTWICKLUNGSTOOL",
+
     heroText:
-      "Ein wiederverwendbares Interaktionssystem für Unity, das die Erstellung, Konfiguration und Wiederverwendung interaktiver Objekte erleichtert.",
+      "Ein wiederverwendbares Unity-Interaktionssystem, das häufige Gameplay-Interaktionen schneller erstellbar, einfacher konfigurierbar und leichter wiederverwendbar macht.",
+
     featuresButton: "Funktionen ansehen",
-    comingSoonButton: "Demnächst",
+    demoButton: "Demo ansehen",
 
-    statusTitle: "Als wiederverwendbares Unity-System entwickelt",
-    statusText:
-      "Basierend auf modularen Interaktionskomponenten, Inspector-Konfiguration und wiederverwendbaren Prefabs.",
+    status: "IN ENTWICKLUNG",
 
-    aboutTitle: "Was ist Easy Interaction System?",
-    aboutText:
-      "Easy Interaction System ist ein wiederverwendbares Unity-Interaktionssystem, mit dem häufige Gameplay-Interaktionen erstellt und konfiguriert werden können, ohne die gleiche Logik für jedes Projekt neu aufzubauen.",
+    heroCardTitle:
+      "Für wiederverwendbare Interaktionen entwickelt",
 
-    featuresTitle: "Funktionen",
+    heroCardText:
+      "Konfiguriere typische Interaktionen direkt in Unity und verwende dasselbe System in verschiedenen Szenen und Projekten.",
+
+    quick1: "✓ Kamera-RayCast-Interaktion",
+    quick2: "✓ Inspector-Konfiguration",
+    quick3: "✓ Wiederverwendbare Prefabs",
+    quick4: "✓ Demo-Szene & Dokumentation",
+
+    whyEyebrow: "WARUM EASY INTERACTION SYSTEM?",
+
+    whyTitle:
+      "Weniger Zeit für wiederholte grundlegende Interaktionslogik",
+
+    whySubtitle:
+      "Easy Interaction System bietet eine wiederverwendbare Grundlage für typische First-Person-Interaktionen in Unity-Projekten.",
+
+    why1Title: "Wiederverwendbar",
+
+    why1Text:
+      "Verwende dieselbe Interaktionsbasis in mehreren Szenen, anstatt das System jedes Mal neu aufzubauen.",
+
+    why2Title: "Inspector-freundlich",
+
+    why2Text:
+      "Konfiguriere Hinweise, Referenzen, Farben, Interaktionsdistanz und Events direkt im Unity Inspector.",
+
+    why3Title: "Schnell testbar",
+
+    why3Text:
+      "Ein Demo-Setup zeigt Entwicklern schnell, wie das System funktioniert, bevor es integriert wird.",
+
+    featuresTitle: "Aktuelle Funktionen",
+
     featuresSubtitle:
-      "Aktuell bestätigte Funktionen des Systems.",
+      "Diese bestätigten Systeme sind aktuell in Easy Interaction System enthalten.",
 
     feature1Title: "Raycast-Interaktion",
+
     feature1Text:
       "Erkennt interaktive Objekte direkt über die Spielerkamera.",
 
     feature2Title: "Interaktionshinweise",
+
     feature2Text:
-      "Zeigt kontextabhängigen Interaktionstext an, wenn der Spieler auf ein interaktives Objekt schaut.",
+      "Zeigt kontextabhängigen Text an, wenn der Spieler ein interaktives Objekt anvisiert.",
 
     feature3Title: "Interaktive Türen",
+
     feature3Text:
-      "Sofort nutzbare Türinteraktionen zum Öffnen und Schließen von Objekten.",
+      "Fertige Türinteraktionen zum Öffnen und Schließen von Objekten.",
 
     feature4Title: "Interaktive Buttons",
+
     feature4Text:
-      "Aktionen über wiederverwendbare interaktive Button-Komponenten auslösen.",
+      "Wiederverwendbare Buttons können konfigurierte Gameplay-Aktionen auslösen.",
 
     feature5Title: "Statusanzeigen",
+
     feature5Text:
-      "Visuelle Anzeigen können Zustände wie geöffnet und geschlossen darstellen.",
+      "Visuelle Anzeigen können Zustände wie geöffnet oder geschlossen darstellen.",
 
     feature6Title: "Unity Events",
+
     feature6Text:
-      "Button-Interaktionen über den Inspector mit zusätzlichen Gameplay-Aktionen verbinden.",
+      "Verbinde Button-Interaktionen direkt über den Inspector mit weiteren Aktionen.",
 
     feature7Title: "Inspector-Konfiguration",
+
     feature7Text:
-      "Hinweise, Interaktionsdistanz, Referenzen, Farben und Events direkt in Unity konfigurieren.",
+      "Konfiguriere Interaktionsdistanz, Hinweise, Referenzen, Farben und Events direkt in Unity.",
 
     feature8Title: "Wiederverwendbare Prefabs",
-    feature8Text:
-      "Fertige Prefabs erleichtern die Nutzung des Systems in verschiedenen Szenen und Projekten.",
 
-    demoTitle: "Demo",
-    demoText:
-      "Eine eigene Demo-Szene zeigt das Interaktionssystem, Türen, Buttons, Hinweise und Statusanzeigen.",
-    demoPlaceholder:
-      "Screenshots und Videodemonstrationen werden vor der Veröffentlichung hinzugefügt.",
+    feature8Text:
+      "Fertige Prefabs vereinfachen die Wiederverwendung des Systems in verschiedenen Szenen.",
+
+    demoEyebrow: "IN AKTION",
+
+    demoTitle: "Demo & Vorschau",
+
+    demoSubtitle:
+      "Die Demo-Szene zeigt das System mit Tür, interaktivem Button, UI-Hinweisen und Statusanzeigen.",
+
+    videoTitle: "Videodemonstration",
+
+    videoText:
+      "Eine kurze Gameplay-Demonstration wird vor der öffentlichen Veröffentlichung hinzugefügt.",
+
+    screensTitle: "Screenshots",
+
+    screensText:
+      "Screenshots aus der Unity-Demo-Szene und dem Inspector werden hier hinzugefügt.",
+
+    includedEyebrow: "PAKETINHALT",
 
     includedTitle: "Enthalten",
+
     includedSubtitle:
-      "Das Paket ist für schnelles Testen und Integrieren strukturiert.",
+      "Easy Interaction System ist als eigenständiges Unity-Paket mit Kernsystem, Beispielen und Dokumentation organisiert.",
 
-    included1Title: "Scripts",
+    included1Title: "Core Scripts",
+
     included1Text:
-      "Scripts für Interaktion, Buttons, Türen, UI und Demo-Controller.",
+      "Logik für Interaktion, Raycast, UI, Buttons, Türen und Statusanzeigen.",
 
-    included2Title: "Prefabs",
+    included2Title: "Wiederverwendbare Prefabs",
+
     included2Text:
-      "Wiederverwendbare Setup- und Demo-Prefabs.",
+      "Fertige System- und Demo-Prefabs.",
 
     included3Title: "Demo-Szene",
-    included3Text:
-      "Eine sofort ausführbare Szene zur Demonstration des Systems.",
 
-    included4Title: "Dokumentation",
+    included3Text:
+      "Eine direkt ausführbare Beispielszene zur Demonstration des Systems.",
+
+    included4Title: "Demo-Controller",
+
     included4Text:
-      "Setup-Informationen und README-Dokumentation sind enthalten.",
+      "Einfache Bewegungs- und Kamera-Scripts zum schnellen Testen.",
+
+    included5Title: "UI-Setup",
+
+    included5Text:
+      "Interaction Canvas und Prompt-Komponenten für die Demonstration.",
+
+    included6Title: "Dokumentation",
+
+    included6Text:
+      "README und Setup-Informationen sind im Paket enthalten.",
 
     technicalTitle: "Technische Informationen",
 
+    technicalSubtitle:
+      "Die endgültige Unity-Versionskompatibilität wird vor der Veröffentlichung bestätigt.",
+
     tech1Label: "Engine",
-    tech2Label: "Konfiguration",
-    tech2Value: "Über den Inspector",
+    tech2Label: "Interaktion",
+    tech2Value: "Kamera-RayCast",
 
-    tech3Label: "Interaktionsmethode",
-    tech3Value: "Kamera-RayCast",
+    tech3Label: "Konfiguration",
+    tech3Value: "Unity Inspector",
 
-    tech4Label: "Demo-Controller",
-    tech4Value: "Enthalten",
+    tech4Label: "Unity Events",
+    tech5Label: "Demo-Szene",
+    tech6Label: "Dokumentation",
+    tech7Label: "Status",
 
-    tech5Label: "Dokumentation",
-    tech5Value: "Enthalten",
-
-    tech6Label: "Veröffentlichungsstatus",
-    tech6Value: "In Entwicklung",
+    includedValue: "Enthalten",
+    developmentValue: "In Entwicklung",
 
     documentationTitle: "Dokumentation & Support",
+
     documentationText:
-      "Dokumentation ist im Paket enthalten. Zusätzliche Online-Dokumentation und Supportinformationen können vor der Veröffentlichung hier ergänzt werden.",
+      "Setup-Dokumentation ist im Paket enthalten. Zusätzliche Online-Dokumentation, Beispiele und Supportinformationen können mit der weiteren Entwicklung auf der Oktavin.exe-Website ergänzt werden.",
 
-    purchaseEyebrow: "VERÖFFENTLICHUNG",
+    purchaseEyebrow: "UNITY ASSET STORE",
+
     purchaseText:
-      "Das Produkt wird derzeit für die Veröffentlichung vorbereitet. Kaufinformationen erscheinen hier, sobald die Asset-Store-Version verfügbar ist.",
+      "Easy Interaction System wird derzeit für die Veröffentlichung vorbereitet. Der offizielle Unity Asset Store-Link erscheint hier nach der Veröffentlichung.",
 
-    purchaseButton:
-      "Demnächst im Unity Asset Store",
+    purchaseButton: "Demnächst",
 
-    footerText:
+    footer:
       "Spieleentwicklung · Unity Tools · Digitale Projekte"
   },
 
 
   uk: {
     back: "← Назад до Unity Tools",
+
     eyebrow: "UNITY-ІНСТРУМЕНТ",
+
     heroText:
-      "Багаторазова система взаємодії для Unity, створена для спрощення створення, налаштування та повторного використання інтерактивних об'єктів.",
-    featuresButton: "Переглянути функції",
-    comingSoonButton: "Незабаром",
+      "Багаторазова система взаємодії для Unity, створена для швидшої реалізації, простішого налаштування та повторного використання типових ігрових взаємодій.",
 
-    statusTitle: "Створено як багаторазову Unity-систему",
-    statusText:
-      "Побудовано на модульних компонентах взаємодії, налаштуванні через Inspector та багаторазових prefab-об'єктах.",
+    featuresButton: "Переглянути можливості",
+    demoButton: "Переглянути демо",
 
-    aboutTitle: "Що таке Easy Interaction System?",
-    aboutText:
-      "Easy Interaction System — багаторазова система взаємодії для Unity, яка дозволяє створювати та налаштовувати типові ігрові взаємодії без повторного написання тієї самої логіки для кожного проєкту.",
+    status: "У РОЗРОБЦІ",
 
-    featuresTitle: "Можливості",
+    heroCardTitle:
+      "Створено для багаторазових взаємодій",
+
+    heroCardText:
+      "Налаштовуйте типові взаємодії безпосередньо в Unity та використовуйте ту саму систему в різних сценах і проєктах.",
+
+    quick1: "✓ Raycast-взаємодія від камери",
+    quick2: "✓ Налаштування через Inspector",
+    quick3: "✓ Багаторазові Prefabs",
+    quick4: "✓ Demo-сцена та документація",
+
+    whyEyebrow: "НАВІЩО EASY INTERACTION SYSTEM?",
+
+    whyTitle:
+      "Менше часу на повторне створення базової логіки взаємодій",
+
+    whySubtitle:
+      "Easy Interaction System створений як багаторазова основа для типових first-person взаємодій у Unity-проєктах.",
+
+    why1Title: "Багаторазовість",
+
+    why1Text:
+      "Використовуйте одну основу взаємодії в різних сценах замість повторного створення системи.",
+
+    why2Title: "Зручність Inspector",
+
+    why2Text:
+      "Налаштовуйте підказки, посилання, кольори, дистанцію взаємодії та події безпосередньо в Unity Inspector.",
+
+    why3Title: "Швидке тестування",
+
+    why3Text:
+      "Demo-налаштування дозволяє швидко зрозуміти роботу системи перед інтеграцією.",
+
+    featuresTitle: "Поточні можливості",
+
     featuresSubtitle:
-      "Поточні підтверджені можливості системи.",
+      "Це підтверджені системи, які наразі входять до Easy Interaction System.",
 
     feature1Title: "Raycast-взаємодія",
+
     feature1Text:
-      "Виявлення інтерактивних об'єктів безпосередньо з камери гравця.",
+      "Виявлення інтерактивних об'єктів безпосередньо від камери гравця.",
 
     feature2Title: "Підказки взаємодії",
+
     feature2Text:
-      "Відображення контекстного тексту, коли гравець дивиться на інтерактивний об'єкт.",
+      "Відображення контекстного тексту, коли гравець наводиться на інтерактивний об'єкт.",
 
     feature3Title: "Інтерактивні двері",
+
     feature3Text:
       "Готові взаємодії для відкриття та закриття дверей.",
 
     feature4Title: "Інтерактивні кнопки",
+
     feature4Text:
-      "Запуск дій через багаторазові інтерактивні компоненти кнопок.",
+      "Багаторазові кнопки можуть запускати налаштовані ігрові дії.",
 
     feature5Title: "Індикатори стану",
+
     feature5Text:
-      "Візуальні індикатори можуть показувати стани об'єктів, наприклад відкрито або закрито.",
+      "Візуальні індикатори можуть показувати стан об'єкта, наприклад відкрито або закрито.",
 
     feature6Title: "Unity Events",
+
     feature6Text:
-      "Підключення додаткових ігрових дій до кнопок через Inspector.",
+      "Підключайте додаткові дії до кнопок безпосередньо через Inspector.",
 
     feature7Title: "Налаштування через Inspector",
+
     feature7Text:
-      "Налаштування підказок, дистанції взаємодії, посилань, кольорів та подій безпосередньо в Unity.",
+      "Налаштовуйте дистанцію взаємодії, підказки, посилання, кольори та події безпосередньо в Unity.",
 
     feature8Title: "Багаторазові Prefabs",
-    feature8Text:
-      "Готові prefab-об'єкти спрощують перенесення системи між сценами та проєктами.",
 
-    demoTitle: "Демонстрація",
-    demoText:
-      "Окрема demo-сцена демонструє систему взаємодії, двері, кнопки, підказки та індикатори стану.",
-    demoPlaceholder:
-      "Скріншоти та відеодемонстрація будуть додані перед релізом.",
+    feature8Text:
+      "Готові prefab-об'єкти спрощують перенесення та повторне використання системи між сценами.",
+
+    demoEyebrow: "ДЕМОНСТРАЦІЯ",
+
+    demoTitle: "Demo & Preview",
+
+    demoSubtitle:
+      "Demo-сцена показує роботу системи з дверима, інтерактивною кнопкою, UI-підказками та індикаторами стану.",
+
+    videoTitle: "Відеодемонстрація",
+
+    videoText:
+      "Коротка демонстрація роботи буде додана перед публічним релізом.",
+
+    screensTitle: "Скріншоти",
+
+    screensText:
+      "Тут будуть додані скріншоти demo-сцени Unity та налаштувань Inspector.",
+
+    includedEyebrow: "ВМІСТ ПАКЕТА",
 
     includedTitle: "Що входить",
+
     includedSubtitle:
-      "Пакет структурований для швидкого тестування та інтеграції.",
+      "Easy Interaction System організований як окремий Unity-пакет з основною системою, прикладами та документацією.",
 
-    included1Title: "Скрипти",
+    included1Title: "Основні скрипти",
+
     included1Text:
-      "Основні скрипти взаємодії, кнопок, дверей, UI та demo-контролера.",
+      "Логіка взаємодії, raycast, UI, кнопок, дверей та індикаторів стану.",
 
-    included2Title: "Prefabs",
+    included2Title: "Багаторазові Prefabs",
+
     included2Text:
-      "Багаторазові prefab-об'єкти налаштування та демонстрації.",
+      "Готові системні та demo-prefab-об'єкти.",
 
     included3Title: "Demo-сцена",
-    included3Text:
-      "Готова до запуску сцена, що демонструє роботу системи.",
 
-    included4Title: "Документація",
+    included3Text:
+      "Готова до запуску прикладна сцена, що демонструє систему.",
+
+    included4Title: "Demo-контролер",
+
     included4Text:
-      "Інформація з налаштування та README-документація входять до проєкту.",
+      "Прості скрипти руху та камери для швидкого тестування.",
+
+    included5Title: "UI Setup",
+
+    included5Text:
+      "Interaction Canvas та компоненти підказок для демонстрації.",
+
+    included6Title: "Документація",
+
+    included6Text:
+      "README та інформація з налаштування входять до пакета.",
 
     technicalTitle: "Технічна інформація",
 
+    technicalSubtitle:
+      "Точна сумісність з версіями Unity буде підтверджена перед релізом.",
+
     tech1Label: "Двигун",
-    tech2Label: "Налаштування",
-    tech2Value: "Через Inspector",
+    tech2Label: "Взаємодія",
+    tech2Value: "Raycast від камери",
 
-    tech3Label: "Метод взаємодії",
-    tech3Value: "Raycast від камери",
+    tech3Label: "Налаштування",
+    tech3Value: "Unity Inspector",
 
-    tech4Label: "Demo-контролер",
-    tech4Value: "Входить",
+    tech4Label: "Unity Events",
+    tech5Label: "Demo-сцена",
+    tech6Label: "Документація",
+    tech7Label: "Статус",
 
-    tech5Label: "Документація",
-    tech5Value: "Входить",
-
-    tech6Label: "Статус релізу",
-    tech6Value: "У розробці",
+    includedValue: "Входить",
+    developmentValue: "У розробці",
 
     documentationTitle: "Документація та підтримка",
+
     documentationText:
-      "Документація входить до пакета. Додаткова онлайн-документація та інформація про підтримку можуть бути опубліковані тут ближче до релізу.",
+      "Документація з налаштування входить до пакета. Додаткова онлайн-документація, приклади та інформація про підтримку можуть бути додані на сайт Oktavin.exe у міру розвитку продукту.",
 
-    purchaseEyebrow: "РЕЛІЗ",
+    purchaseEyebrow: "UNITY ASSET STORE",
+
     purchaseText:
-      "Продукт зараз готується до релізу. Інформація про придбання з'явиться тут, коли версія для Unity Asset Store стане доступною.",
+      "Easy Interaction System зараз готується до релізу. Офіційне посилання на Unity Asset Store з'явиться тут після публікації продукту.",
 
-    purchaseButton:
-      "Незабаром у Unity Asset Store",
+    purchaseButton: "Незабаром",
 
-    footerText:
+    footer:
       "Розробка ігор · Unity Tools · Цифрові проєкти"
   },
 
 
   ru: {
     back: "← Назад к Unity Tools",
+
     eyebrow: "UNITY-ИНСТРУМЕНТ",
+
     heroText:
-      "Многоразовая система взаимодействия для Unity, созданная для упрощения создания, настройки и повторного использования интерактивных объектов.",
+      "Многоразовая система взаимодействия для Unity, созданная для более быстрого создания, простой настройки и повторного использования типовых игровых взаимодействий.",
+
     featuresButton: "Посмотреть возможности",
-    comingSoonButton: "Скоро",
+    demoButton: "Посмотреть демо",
 
-    statusTitle: "Создано как многоразовая Unity-система",
-    statusText:
-      "Построено на модульных компонентах взаимодействия, настройке через Inspector и многоразовых prefab-объектах.",
+    status: "В РАЗРАБОТКЕ",
 
-    aboutTitle: "Что такое Easy Interaction System?",
-    aboutText:
-      "Easy Interaction System — многоразовая система взаимодействия для Unity, позволяющая создавать и настраивать типовые игровые взаимодействия без повторного написания одной и той же логики для каждого проекта.",
+    heroCardTitle:
+      "Создано для многоразовых взаимодействий",
 
-    featuresTitle: "Возможности",
+    heroCardText:
+      "Настраивайте типовые взаимодействия прямо в Unity и используйте одну систему в разных сценах и проектах.",
+
+    quick1: "✓ Raycast-взаимодействие от камеры",
+    quick2: "✓ Настройка через Inspector",
+    quick3: "✓ Многоразовые Prefabs",
+    quick4: "✓ Demo-сцена и документация",
+
+    whyEyebrow: "ЗАЧЕМ EASY INTERACTION SYSTEM?",
+
+    whyTitle:
+      "Меньше времени на повторное создание базовой логики взаимодействий",
+
+    whySubtitle:
+      "Easy Interaction System создан как многоразовая основа для типовых first-person взаимодействий в Unity-проектах.",
+
+    why1Title: "Многоразовость",
+
+    why1Text:
+      "Используйте одну основу взаимодействия в разных сценах вместо повторного создания системы.",
+
+    why2Title: "Удобный Inspector",
+
+    why2Text:
+      "Настраивайте подсказки, ссылки, цвета, дистанцию взаимодействия и события непосредственно в Unity Inspector.",
+
+    why3Title: "Быстрое тестирование",
+
+    why3Text:
+      "Demo-настройка позволяет быстро понять работу системы перед интеграцией.",
+
+    featuresTitle: "Текущие возможности",
+
     featuresSubtitle:
-      "Текущие подтверждённые возможности системы.",
+      "Это подтверждённые системы, которые сейчас входят в Easy Interaction System.",
 
     feature1Title: "Raycast-взаимодействие",
+
     feature1Text:
       "Определение интерактивных объектов непосредственно от камеры игрока.",
 
     feature2Title: "Подсказки взаимодействия",
+
     feature2Text:
-      "Отображение контекстного текста, когда игрок смотрит на интерактивный объект.",
+      "Отображение контекстного текста, когда игрок наводится на интерактивный объект.",
 
     feature3Title: "Интерактивные двери",
+
     feature3Text:
       "Готовые взаимодействия для открытия и закрытия дверей.",
 
     feature4Title: "Интерактивные кнопки",
+
     feature4Text:
-      "Запуск действий через многоразовые интерактивные компоненты кнопок.",
+      "Многоразовые кнопки могут запускать настроенные игровые действия.",
 
     feature5Title: "Индикаторы состояния",
+
     feature5Text:
       "Визуальные индикаторы могут показывать состояние объекта, например открыт или закрыт.",
 
     feature6Title: "Unity Events",
+
     feature6Text:
-      "Подключение дополнительных игровых действий к кнопкам через Inspector.",
+      "Подключайте дополнительные действия к кнопкам непосредственно через Inspector.",
 
     feature7Title: "Настройка через Inspector",
+
     feature7Text:
-      "Настройка подсказок, дистанции взаимодействия, ссылок, цветов и событий прямо в Unity.",
+      "Настраивайте дистанцию взаимодействия, подсказки, ссылки, цвета и события непосредственно в Unity.",
 
     feature8Title: "Многоразовые Prefabs",
-    feature8Text:
-      "Готовые prefab-объекты упрощают перенос системы между сценами и проектами.",
 
-    demoTitle: "Демонстрация",
-    demoText:
-      "Отдельная demo-сцена демонстрирует систему взаимодействия, двери, кнопки, подсказки и индикаторы состояния.",
-    demoPlaceholder:
-      "Скриншоты и видеодемонстрация будут добавлены перед релизом.",
+    feature8Text:
+      "Готовые prefab-объекты упрощают перенос и повторное использование системы между сценами.",
+
+    demoEyebrow: "ДЕМОНСТРАЦИЯ",
+
+    demoTitle: "Demo & Preview",
+
+    demoSubtitle:
+      "Demo-сцена показывает работу системы с дверью, интерактивной кнопкой, UI-подсказками и индикаторами состояния.",
+
+    videoTitle: "Видеодемонстрация",
+
+    videoText:
+      "Короткая демонстрация работы будет добавлена перед публичным релизом.",
+
+    screensTitle: "Скриншоты",
+
+    screensText:
+      "Здесь будут добавлены скриншоты demo-сцены Unity и настроек Inspector.",
+
+    includedEyebrow: "СОДЕРЖИМОЕ ПАКЕТА",
 
     includedTitle: "Что входит",
+
     includedSubtitle:
-      "Пакет структурирован для быстрого тестирования и интеграции.",
+      "Easy Interaction System организован как отдельный Unity-пакет с основной системой, примерами и документацией.",
 
-    included1Title: "Скрипты",
+    included1Title: "Основные скрипты",
+
     included1Text:
-      "Основные скрипты взаимодействия, кнопок, дверей, UI и demo-контроллера.",
+      "Логика взаимодействия, raycast, UI, кнопок, дверей и индикаторов состояния.",
 
-    included2Title: "Prefabs",
+    included2Title: "Многоразовые Prefabs",
+
     included2Text:
-      "Многоразовые prefab-объекты настройки и демонстрации.",
+      "Готовые системные и demo-prefab-объекты.",
 
     included3Title: "Demo-сцена",
-    included3Text:
-      "Готовая к запуску сцена, показывающая систему в работе.",
 
-    included4Title: "Документация",
+    included3Text:
+      "Готовая к запуску примерная сцена, демонстрирующая систему.",
+
+    included4Title: "Demo-контроллер",
+
     included4Text:
-      "Информация по настройке и README-документация входят в проект.",
+      "Простые скрипты движения и камеры для быстрого тестирования.",
+
+    included5Title: "UI Setup",
+
+    included5Text:
+      "Interaction Canvas и компоненты подсказок для демонстрации.",
+
+    included6Title: "Документация",
+
+    included6Text:
+      "README и информация по настройке входят в пакет.",
 
     technicalTitle: "Техническая информация",
 
+    technicalSubtitle:
+      "Точная совместимость с версиями Unity будет подтверждена перед релизом.",
+
     tech1Label: "Движок",
-    tech2Label: "Настройка",
-    tech2Value: "Через Inspector",
+    tech2Label: "Взаимодействие",
+    tech2Value: "Raycast от камеры",
 
-    tech3Label: "Метод взаимодействия",
-    tech3Value: "Raycast от камеры",
+    tech3Label: "Настройка",
+    tech3Value: "Unity Inspector",
 
-    tech4Label: "Demo-контроллер",
-    tech4Value: "Входит",
+    tech4Label: "Unity Events",
+    tech5Label: "Demo-сцена",
+    tech6Label: "Документация",
+    tech7Label: "Статус",
 
-    tech5Label: "Документация",
-    tech5Value: "Входит",
-
-    tech6Label: "Статус релиза",
-    tech6Value: "В разработке",
+    includedValue: "Входит",
+    developmentValue: "В разработке",
 
     documentationTitle: "Документация и поддержка",
+
     documentationText:
-      "Документация входит в пакет. Дополнительная онлайн-документация и информация о поддержке могут быть опубликованы здесь ближе к релизу.",
+      "Документация по настройке входит в пакет. Дополнительная онлайн-документация, примеры и информация о поддержке могут добавляться на сайт Oktavin.exe по мере развития продукта.",
 
-    purchaseEyebrow: "РЕЛИЗ",
+    purchaseEyebrow: "UNITY ASSET STORE",
+
     purchaseText:
-      "Продукт сейчас готовится к релизу. Информация о покупке появится здесь, когда версия для Unity Asset Store станет доступна.",
+      "Easy Interaction System сейчас готовится к релизу. Официальная ссылка на Unity Asset Store появится здесь после публикации продукта.",
 
-    purchaseButton:
-      "Скоро в Unity Asset Store",
+    purchaseButton: "Скоро",
 
-    footerText:
+    footer:
       "Разработка игр · Unity Tools · Цифровые проекты"
   }
 
 };
 
 
+function normalizeLanguage(lang) {
+
+  if (lang === "ua") {
+    return "uk";
+  }
+
+  return lang;
+
+}
+
+
 function setLanguage(lang) {
 
+  const normalized =
+    normalizeLanguage(lang);
+
   const selected =
-    translations[lang]
-      ? lang
+    translations[normalized]
+      ? normalized
       : "en";
 
   const dict =
     translations[selected];
 
+
   document.documentElement.lang =
-    selected === "uk"
-      ? "uk"
-      : selected;
+    selected;
+
 
   document
     .querySelectorAll("[data-i18n]")
@@ -1416,10 +2217,12 @@ function setLanguage(lang) {
         element.dataset.i18n;
 
       if (dict[key]) {
-        element.textContent = dict[key];
+        element.textContent =
+          dict[key];
       }
 
     });
+
 
   document
     .querySelectorAll(".lang-btn")
@@ -1431,6 +2234,7 @@ function setLanguage(lang) {
       );
 
     });
+
 
   localStorage.setItem(
     "oktavin-language",
@@ -1447,9 +2251,11 @@ document
     button.addEventListener(
       "click",
       () => {
+
         setLanguage(
           button.dataset.lang
         );
+
       }
     );
 
@@ -1457,14 +2263,19 @@ document
 
 
 const savedLanguage =
-  localStorage.getItem(
-    "oktavin-language"
+  normalizeLanguage(
+    localStorage.getItem(
+      "oktavin-language"
+    )
   );
+
 
 const browserLanguage =
   navigator.language.toLowerCase();
 
-let defaultLanguage = "en";
+
+let defaultLanguage =
+  "en";
 
 
 if (
@@ -1505,7 +2316,9 @@ else if (
 }
 
 
-setLanguage(defaultLanguage);
+setLanguage(
+  defaultLanguage
+);
 
 </script>
 
