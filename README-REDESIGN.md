@@ -19,3 +19,7 @@ Upload the **contents** of this folder to the root of `oktavinexe.github.io` rep
 - Existing toolkit page retains its prior design temporarily, with a navigation banner
 - No backend was added: news and contact are static, not interactive comment forms
 - The new brand mark is a CSS placeholder, not a replacement for your official logo; replace with approved asset later
+
+
+## Deployment note
+Keep folder paths intact: `projects/index.html` must be inside `projects/`, not uploaded to repository root. Recommended deployment: GitHub Desktop (copy files preserving directory tree).
