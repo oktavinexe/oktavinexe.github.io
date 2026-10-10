@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://oktavinexe.github.io/</loc>
-  </url>
-  <url>
-    <loc>https://oktavinexe.github.io/unity-tools/</loc>
-  </url>
-  <url>
-    <loc>https://oktavinexe.github.io/unity-tools/easy-interaction-toolkit/</loc>
-  </url>
+  <url><loc>https://oktavinexe.github.io/</loc></url>
+  <url><loc>https://oktavinexe.github.io/projects/</loc></url>
+  <url><loc>https://oktavinexe.github.io/projects/oktavin-flow/</loc></url>
+  <url><loc>https://oktavinexe.github.io/projects/second-chance-store/</loc></url>
+  <url><loc>https://oktavinexe.github.io/projects/easy-interaction-toolkit/</loc></url>
+  <url><loc>https://oktavinexe.github.io/news/</loc></url>
+  <url><loc>https://oktavinexe.github.io/about/</loc></url>
+  <url><loc>https://oktavinexe.github.io/contact/</loc></url>
+  <url><loc>https://oktavinexe.github.io/unity-tools/</loc></url>
+  <url><loc>https://oktavinexe.github.io/unity-tools/easy-interaction-toolkit/</loc></url>
+  <url><loc>https://oktavinexe.github.io/privacy/</loc></url>
 </urlset>

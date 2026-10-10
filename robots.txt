@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://oktavinexe.github.io/sitemap.xml
