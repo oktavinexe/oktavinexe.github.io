@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light">
+<title>Oktavin Flow — Account and Data Deletion</title>
+<meta name="description" content="Self-service account deletion requests for Oktavin Flow — Oktavin.exe">
+<style>
+:root{color-scheme:light;--ink:#302e40;--muted:#69667b;--pink:#915b82;--line:#eadce7}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(150deg,#fffbfc,#f8f7ff);color:var(--ink);font:16px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:880px;margin:42px auto;background:#fff;padding:clamp(20px,5vw,58px);border:1px solid var(--line);border-radius:20px;box-shadow:0 16px 55px #c6abc11b}
+header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:18px;border-bottom:1px solid var(--line);padding-bottom:25px;margin-bottom:22px}
+.logo{font-size:1.15rem;font-weight:800}.logo span{color:#bd7399}select,input{background:#fff;border:1px solid #c8adc2;border-radius:10px;padding:11px 12px;font:inherit;color:var(--ink);max-width:100%}
+label{font-weight:600}a{color:#975475;text-decoration-thickness:1px;text-underline-offset:3px}a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #b991f1;outline-offset:3px}
+nav{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:22px;font-size:.94rem}h1{font-size:clamp(1.65rem,4vw,2.3rem);line-height:1.23;margin:0 0 20px}h2{font-size:1.16rem;margin:24px 0 10px}
+p{margin:0 0 15px}form{display:grid;gap:16px}fieldset{border:1px solid var(--line);border-radius:14px;padding:13px 17px}fieldset label{font-weight:400;margin-right:12px;display:inline-flex;gap:8px;align-items:center}
+.field{display:grid;gap:5px}.field input{width:100%}button{font:inherit;cursor:pointer;border-radius:12px;padding:10px 16px}button.primary{background:var(--pink);border:0;color:#fff;font-weight:700}button.primary:disabled{opacity:.55;cursor:not-allowed}button.secondary{color:var(--pink);background:#fff;border:1px solid #c8adc2}
+.small{color:var(--muted);font-size:.9rem}.message{min-height:1.5em;font-weight:600}.message.error{color:#a02f42}.message.ok{color:#326949}
+.notice{background:#fff8fc;padding:14px 17px;border:1px solid var(--line);border-radius:12px}footer{border-top:1px solid var(--line);padding-top:18px;color:var(--muted);font-size:.88rem;margin-top:32px}
+[hidden]{display:none!important}@media(max-width:500px){main{margin:0;border:0;border-radius:0}body{background:#fff}}
+</style></head>
+<body><main>
+<header><div class="logo">Oktavin<span>.exe</span> / Flow</div><div><label for="language" id="languageLabel">Language / Sprache / Мова / Язык</label> <select id="language"><option value="en">English</option><option value="ru">Русский</option><option value="de">Deutsch</option><option value="uk">Українська</option></select></div></header>
+<nav><a id="policyLink" href="../privacy/index.html">Privacy Policy</a><a id="parentLink" href="../parents/index.html">Parent information</a><a id="deletionLink" href="../account-deletion/index.html">Account deletion</a></nav>
+<h1 id="title">Request account deletion</h1><p id="intro"></p>
+<div class="notice"><p id="notice"></p></div>
+<h2 id="stepTitle"></h2>
+<form id="deleteForm" novalidate>
+<fieldset><legend id="modeLegend"></legend><label><input type="radio" name="mode" value="self" checked><span id="selfLabel"></span></label><label><input type="radio" name="mode" value="managed_child"><span id="childLabel"></span></label></fieldset>
+<div class="field"><label for="email" id="emailLabel"></label><input id="email" name="email" type="email" autocomplete="email" inputmode="email" maxlength="254" required></div>
+<div class="field" id="childField" hidden><label for="childEmail" id="childEmailLabel"></label><input id="childEmail" name="childEmail" type="email" autocomplete="off" maxlength="254"></div>
+<div id="codeField" class="field" hidden><label for="code" id="codeLabel"></label><input id="code" name="code" type="text" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="one-time-code"><p class="small" id="codeInfo"></p></div>
+<button type="submit" id="submit" class="primary"></button><button type="button" id="reset" class="secondary" hidden></button>
+<p id="status" class="message" role="status" aria-live="polite"></p>
+</form>
+<h2 id="detailTitle"></h2><p id="detailText"></p><p class="small" id="dataText"></p>
+<footer>Andrii Artynov · Oktavin.exe · <span>oktavinexe@gmail.com</span></footer>
+</main>
+<script>
+"use strict";
+// Public endpoints. Publish functions FIRST; previewing this file locally does not send requests.
+const API={start:"https://europe-west3-oktavin-flow.cloudfunctions.net/startOktavinWebDeletion",confirm:"https://europe-west3-oktavin-flow.cloudfunctions.net/confirmOktavinWebDeletion"};
+const translations={
+  en:{policy:"Privacy Policy",parents:"Parent information",deletion:"Account deletion",title:"Delete an Oktavin Flow account",intro:"Submit a verified account deletion request directly. You do not need to install the app or email the developer.",notice:"A code will be sent to the email registered to the account. For a managed child, enter the parent account email; the server checks the parent-child link. A code alone does not verify parental authority for creating child accounts.",step:"Verify your request",mode:"What would you like to delete?",self:"My account",child:"My managed child's account",email:"Your registered email (parent's email for a child)",childEmail:"Child's registered email",code:"Verification code (6 digits)",codeInfo:"Check your inbox and spam folder. The code expires in 10 minutes.",send:"Send verification code",confirm:"Confirm deletion request",retry:"Start again / resend",generic:"If a matching account exists, a verification code will arrive. Check your inbox and spam folder.",ok:"Your deletion request was registered. This does not mean your data has already been deleted.",existing:"A deletion request is already registered for this account.",invalid:"Code invalid or expired, or this deletion is not authorized. Check the details and try again.",bad:"Check the email address and required fields.",offline:"The service is currently unavailable. Please try later.",local:"Online requests work on the published Oktavin.exe website, not from a local HTML file.",detail:"What happens next?",details:"The server queues the request for verified processing. Shared Partner spaces and legally required records may need special handling; the app must not delete other people's data. Account deletion does not cancel Google Play subscriptions — cancel them separately in Google Play.",data:"Never share passwords, ID documents or payment card details here. Email support remains available for exceptional circumstances."},
+  ru:{policy:"Конфиденциальность",parents:"Для родителей",deletion:"Удаление аккаунта",title:"Удаление аккаунта Oktavin Flow",intro:"Самостоятельно отправьте подтверждённый запрос на удаление. Не нужно устанавливать приложение или писать разработчику.",notice:"Код придёт на почту аккаунта. Для управляемого ребёнка укажите почту родителя: сервер проверит существующую связь родителя и ребёнка. Сам по себе код не подтверждает родительские полномочия для создания детских аккаунтов.",step:"Подтверждение запроса",mode:"Какой аккаунт удалить?",self:"Мой аккаунт",child:"Аккаунт моего ребёнка",email:"Email аккаунта (для ребёнка — email родителя)",childEmail:"Email аккаунта ребёнка",code:"Код из письма (6 цифр)",codeInfo:"Проверьте входящие и папку «Спам». Код действителен 10 минут.",send:"Отправить код",confirm:"Подтвердить запрос на удаление",retry:"Начать заново / повторить",generic:"Если такой аккаунт существует, письмо с кодом придёт на почту. Проверьте входящие и «Спам».",ok:"Запрос на удаление зарегистрирован. Это ещё не означает, что данные уже удалены.",existing:"Запрос на удаление уже зарегистрирован.",invalid:"Код неверный, истёк или удаление не разрешено. Проверьте данные и повторите попытку.",bad:"Проверьте email и обязательные поля.",offline:"Сервис временно недоступен. Повторите позже.",local:"Отправка запросов работает с опубликованного сайта Oktavin.exe, а не из локального HTML-файла.",detail:"Что произойдёт дальше?",details:"Сервер отправит запрос в очередь проверенной обработки. Общие пространства Partner и документы, обязательные к хранению по закону, могут требовать специальных мер: чужие данные удалять нельзя. Удаление аккаунта не отменяет подписку Google Play — её необходимо отменять отдельно.",data:"Не вводите здесь пароль, паспортные данные или сведения банковской карты. Почта поддержки остаётся для исключительных случаев."},
+  de:{policy:"Datenschutz",parents:"Elterninformationen",deletion:"Kontolöschung",title:"Oktavin Flow-Konto löschen",intro:"Stelle eine bestätigte Löschanfrage selbst. Du musst die App nicht erneut installieren oder dem Entwickler eine E-Mail schreiben.",notice:"Der Code geht an die zum Konto gehörende E-Mail-Adresse. Bei einem verwalteten Kinderkonto gib die Eltern-E-Mail ein; der Server prüft die Eltern-Kind-Verknüpfung. Ein E-Mail-Code allein belegt keine Sorgeberechtigung zur Einrichtung eines Kinderkontos.",step:"Anfrage bestätigen",mode:"Welches Konto soll gelöscht werden?",self:"Mein Konto",child:"Konto meines Kindes",email:"E-Mail des Kontos (bei Kindern: Eltern-E-Mail)",childEmail:"E-Mail des Kinderkontos",code:"Bestätigungscode (6 Ziffern)",codeInfo:"Prüfe Posteingang und Spam. Der Code gilt 10 Minuten.",send:"Code senden",confirm:"Löschanfrage bestätigen",retry:"Neu starten / erneut senden",generic:"Wenn das Konto existiert, erhältst du einen Code per E-Mail. Prüfe den Posteingang und Spam.",ok:"Deine Löschanfrage wurde erfasst. Die Daten wurden damit noch nicht gelöscht.",existing:"Für dieses Konto liegt bereits ein Löschantrag vor.",invalid:"Code ungültig oder abgelaufen oder Löschung nicht berechtigt. Bitte Angaben prüfen.",bad:"Bitte E-Mail und Pflichtfelder prüfen.",offline:"Der Dienst ist vorübergehend nicht verfügbar. Bitte später erneut versuchen.",local:"Anfragen funktionieren auf der veröffentlichten Oktavin.exe-Website, nicht in einer lokalen HTML-Datei.",detail:"Wie geht es weiter?",details:"Der Server übergibt die Anfrage an die geprüfte Verarbeitung. Gemeinsame Partner-Bereiche und rechtlich aufzubewahrende Daten erfordern möglicherweise besondere Behandlung; Daten anderer Personen dürfen nicht gelöscht werden. Ein Google Play-Abo muss separat gekündigt werden.",data:"Gib hier keine Passwörter, Ausweisdokumente oder Zahlungsdaten ein. Für Ausnahmefälle bleibt die Support-E-Mail verfügbar."},
+  uk:{policy:"Конфіденційність",parents:"Для батьків",deletion:"Видалення акаунта",title:"Видалення акаунта Oktavin Flow",intro:"Самостійно надішліть підтверджений запит на видалення. Не потрібно встановлювати застосунок чи писати розробнику.",notice:"Код надійде на електронну пошту акаунта. Для керованої дитини вкажіть пошту батьків: сервер перевірить зв'язок із дитиною. Сам код не підтверджує батьківські повноваження для створення дитячих акаунтів.",step:"Підтвердження запиту",mode:"Який акаунт видалити?",self:"Мій акаунт",child:"Акаунт моєї дитини",email:"Email акаунта (для дитини — email батьків)",childEmail:"Email акаунта дитини",code:"Код із листа (6 цифр)",codeInfo:"Перевірте вхідні листи та «Спам». Код діє 10 хвилин.",send:"Надіслати код",confirm:"Підтвердити запит на видалення",retry:"Почати заново / повторити",generic:"Якщо акаунт існує, код надійде на пошту. Перевірте вхідні та «Спам».",ok:"Запит на видалення зареєстровано. Це ще не означає, що дані вже видалено.",existing:"Запит на видалення вже зареєстровано.",invalid:"Код неправильний, прострочений або видалення не дозволене. Перевірте дані.",bad:"Перевірте email та обов'язкові поля.",offline:"Сервіс тимчасово недоступний. Спробуйте пізніше.",local:"Запити працюють на опублікованому сайті Oktavin.exe, а не з локального HTML-файлу.",detail:"Що буде далі?",details:"Сервер поставить запит у чергу перевіреної обробки. Спільні простори Partner та записи, що мають зберігатися за законом, можуть потребувати окремих дій; чужі дані не видаляються. Видалення акаунта не скасовує підписку Google Play — її потрібно скасувати окремо.",data:"Не вводьте тут паролі, документи чи платіжні дані. Для виняткових випадків залишається адреса підтримки."}
+};
+const $=id=>document.getElementById(id);
+const params=new URLSearchParams(location.search);
+const selected=params.get("lang")||(navigator.language||"en").slice(0,2);
+let lang=Object.hasOwn(translations,selected)?selected:"en";
+let codeStage=false,busy=false;
+const labels={policyLink:"policy",parentLink:"parents",deletionLink:"deletion",title:"title",intro:"intro",notice:"notice",stepTitle:"step",modeLegend:"mode",selfLabel:"self",childLabel:"child",emailLabel:"email",childEmailLabel:"childEmail",codeLabel:"code",codeInfo:"codeInfo",detailTitle:"detail",detailText:"details",dataText:"data"};
+function render(){
+  const t=translations[lang];document.documentElement.lang=lang;$("language").value=lang;
+  for(const [id,key] of Object.entries(labels))$(id).textContent=t[key];
+  $("submit").textContent=codeStage?t.confirm:t.send;
+  $("reset").textContent=t.retry;$("reset").hidden=!codeStage;
+  for(const id of ["policyLink","parentLink","deletionLink"]){
+    const a=$(id);a.href=a.getAttribute("href").split("?")[0]+"?lang="+encodeURIComponent(lang);
+  }
+  $("childField").hidden=document.querySelector('input[name="mode"]:checked').value!=="managed_child";
+  $("codeField").hidden=!codeStage;
+}
+function status(key,type="error"){$("status").textContent=translations[lang][key];$("status").className="message "+type;}
+$("language").addEventListener("change",e=>{lang=e.target.value;render();});
+document.querySelectorAll('input[name="mode"]').forEach(x=>x.addEventListener("change",()=>{codeStage=false;$("code").value="";$("status").textContent="";render();}));
+$("reset").addEventListener("click",()=>{codeStage=false;$("code").value="";$("status").textContent="";render();});
+$("deleteForm").addEventListener("submit",async e=>{
+  e.preventDefault();if(busy)return;
+  const mode=document.querySelector('input[name="mode"]:checked').value;
+  const email=$("email").value.trim();const childEmail=$("childEmail").value.trim();
+  if(!email||!$("email").checkValidity()||mode==="managed_child"&&(!childEmail||!$("childEmail").checkValidity())){status("bad");return;}
+  if(location.protocol!=="https:"||location.hostname!=="oktavinexe.github.io"){status("local");return;}
+  const data={email,language:lang,mode};if(mode==="managed_child")data.childEmail=childEmail;
+  if(codeStage){if(!/^[0-9]{6}$/.test($("code").value.trim())){status("bad");return;}data.code=$("code").value.trim();}
+  busy=true;$("submit").disabled=true;$("status").textContent="";
+  try{
+    const response=await fetch(codeStage?API.confirm:API.start,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(data),cache:"no-store"});
+    const result=await response.json();
+    if(!response.ok||!result.ok){status(response.status===400&&codeStage?"invalid":"offline");}
+    else if(codeStage){status(result.status==="already_requested"?"existing":"ok","ok");codeStage=false;$("deleteForm").reset();}
+    else{codeStage=true;status("generic","ok");}
+  }catch(error){status("offline");}
+  finally{busy=false;$("submit").disabled=false;render();}
+});
+// Browsers may restore a previously selected radio despite the HTML checked attribute.
+// On opening or returning to this page, default to deleting the user's own account.
+function initializeSafeDefault(){
+  const selfChoice=document.querySelector('input[name="mode"][value="self"]');
+  selfChoice.checked=true;
+  $("childEmail").value="";
+  codeStage=false;
+  $("code").value="";
+  $("status").textContent="";
+  render();
+}
+window.addEventListener("pageshow",initializeSafeDefault);
+initializeSafeDefault();
+</script>
+</body></html>
